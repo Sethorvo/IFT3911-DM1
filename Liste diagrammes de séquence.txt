@@ -1,0 +1,29 @@
+Diagrammes de séquence:
+
+VOLET ADMIN :
+
+Création aéroport/ports/gares
+Modification aéroport/ports/gares
+Suppression aéroport/ports/gares
+
+Création compagnie aérienne/croisière/ligne de train
+Modification compagnie aérienne/croisière/ligne de train
+Suppression compagnie aérienne/croisière/ligne de train
+
+Création vol/itinéraire/trajet		--À revoir du au conditon
+Modification vol/itinéraire/trajet
+Suppression vol/itinéraire/trajet
+
+Création de sections d'un avion/paquebot/train
+
+Assignation des prix
+
+Consulter vols/itinéraire
+
+VOLET CLIENT : 
+
+Vérification des vols/trajets/cabines
+Réservation de siège/cabines
+Paiement d'un siège/cabine
+
+
