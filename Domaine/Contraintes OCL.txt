@@ -1,0 +1,13 @@
+context Croisiere
+	inv: self.duree < 22
+	inv: self.hub_D == self.hub_A
+	
+context Vol
+	inv: self.hub_D <> self.hub_A
+
+context Section 
+	inv: Section.allInstances()->forAll(s1, s2 | s1.oclType() == s1.oclType() implies s1.tarif_p == s2.tarif_p)
+
+context Hub 
+	inv: self.ID_hub->size() == 3
+	inv: Section.allInstances()->forAll(h1, h2 | h1.oclType() == h1.oclType() implies h1.ID_hub <> h2.ID_hub)
