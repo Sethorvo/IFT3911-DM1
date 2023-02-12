@@ -1,26 +1,28 @@
-<html data-lt-installed="true"><head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<html data-lt-installed="true">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <title>IFT3911 DM1</title>
     <style type="text/css">
-        table
-        {
+        table {
             border: outset 2px black;
             border-collapse: collapse;
         }
-        th
-        {
+        
+        th {
             border-bottom: double 2px black;
         }
-        td
-        {
+        
+        td {
             border-bottom: solid 1px black;
         }
-        .first_col
-        {
+        
+        .first_col {
             border-right: double 2px black;
         }
     </style>
 </head>
+
 <body>
     <h1 style="text-align: center;">
         IFT 3911 - Devoir 1</h1>
@@ -29,14 +31,14 @@
     <p>
         <span style="font-weight: bold;">Nom: </span>Alexandre Eyrolle
         <br>
-        <span style="font-weight: bold;">Matricule: </span>20134593
+        <span style="font-weight: bold;">Matricule: </span>4593
         <br>
         <span style="font-weight: bold;">Courriel: </span>alexandre.eyrolle@umontreal.ca
         <br>
-        <span style="font-weight: bold;">temps mis: </span>20-30 heures
+        <span style="font-weight: bold;">temps mis: </span>~30 heures
     </p>
     <p>
-        <span style="font-weight: bold;">Nom: </span>John Smith
+        <span style="font-weight: bold;">Nom: </span>Placeholder
         <br>
         <span style="font-weight: bold;">Matricule: </span>5678
         <br>
@@ -59,7 +61,7 @@
                     Alexandre
                 </th>
                 <th>
-                    John
+                    Placeholder
                 </th>
             </tr>
         </thead>
@@ -72,7 +74,7 @@
                     Diagramme conceptuel, operations, attributs (70%)
                 </td>
                 <td>
-                    Methodes, contraintes (50%)
+                    Placeholder (50%)
                 </td>
             </tr>
             <tr>
@@ -83,7 +85,7 @@
                     Diagramme de recherche de vol (20%)
                 </td>
                 <td>
-                    Methodes, contraintes (50%)
+                    Placeholder (50%)
                 </td>
             </tr>
             <tr>
@@ -94,7 +96,6 @@
                     Classes, associations (100%)
                 </td>
                 <td>
-                    Methodes, contraintes (50%)
                 </td>
             </tr>
         </tbody>
@@ -102,12 +103,31 @@
     <h2>
         Hypothèses</h2>
     <p>
-        J'ai supposé que...
+        Pour le diagramme de classe conceptuelle j'ai supposé qu'il fallait s'assurer de créer de faire une conception qui assure une bonne cohésion entre les différents éléments qui composent un vol (siège, transport, hub etc) mais qui tout de même n'affecter
+        pas trop le couplage lorsque l'on implique ces différents éléments pour les différents type de voyage possible. Également car si l'on veut pouvoir coder un bon logiciel il faut anticiper la réutilisation mais faciliter la modification du logiciel.
+        J'ai également supposé qu'il fallait une manière de bien différentié les 2 types d'utilisateurs soulignés dans les consignes.
+
+        <br><br>Pour ce qui en est du diagramme de classe logicielle, ma théorie était de continuer à construire sur ces généralisations et d'avoir des méthodes qui en profitent en utilsant le polymorphisme le plus possible, et également m'assurer que
+        les attributs de chaque classe soient bien définis et mis dans les bonnes classes pour faciliter ce polymorphisme.
+
+        <br><br>Quand au diagramme de paquet j'ai supposé qu'il fallait s'assure avant tout de bien mettre ensemble les classes dont la cohésion et élevé et montrer les relations entre les différentes sections du logiciel
+        <br><br>Pour ce qui relève des contraites OCL il y'a eu plusieurs hypothèses.
+
     </p>
     <h2>
-        Tâche 1</h2>
+        Tâche 1 :Diagramme de classe conceptuelle</h2>
     <p>
-        Voici ma solution pour la tâche 1.
+        L'une des premières chose que nous avons garder en tête lors de la conception du diagramme de classe a été d'appliquer des généralisations de classe le plus possible pour les différentes classes et instances du logiciel. Notamment pour les Hub, Voyage,
+        Transport et Compagnie. Le raisonnement derrière cela est que premièrement toutes les différentes dérivations de ces classes pour les différents transports (Naval, Aérien, Ferroviaire) possède beaucoup d'attributs et opérations en commun et donc
+        cela évite des répétitions inutile d'attribut. Deuxièmement cela rend le logiciel plus flexible si l'on voudrait soit réutiliser certains de ces modules ou même si l'on voulait rajouter plus tard d'autres types de transport ou voyage.
+        <br>Par exemple il est facile de voir que avec le logiciel tel qu'il est implémenté plus tard une plateforme qui prendrait en compte le transport par automobile tell qu'une plateforme de co-voiturage ou même de location de voiture pourrait utiliser
+        déjà plusieurs de ces classes et attributs sans trop de soucis. D'autant plus que cela aide pour le polymoprhisme des opérations où la plupart sont capable de prendre une sous-classe de celle généralisée et retourneront le résultat attendu. La
+        encore aidant la réutilisation. Également si un type de transport devait être retiré pour diverse raison (exemple le logiciel est utilisé non pas pour un réseau de transport mondial mais plus local qui n'aurait pas certains transports), le logiciel
+        pourrait tout de même fonctionner.
+        <br> On a également décidé de faire en sorte que les compagnies aient leur propre liste de voyage et transport même si le système centrale possède déjà tous les voyages et transport possible, premièrement cela facilite certaines recherches de
+        Client et Admin où il ne faut pas parcourir des base de données entières pour ressortir des données mais également il semblerait logique qu'une compagnie possède déjà ce genre de liste, ce qui nous faciliterait le cout en terme de temps de recherche
+        et stockage.
+
     </p>
     <ul>
         <li>Voici un <a href="http://www.iro.umontreal.ca/~syriani/courses/file1.txt">lien</a> vers les fichiers.</li>
@@ -115,72 +135,30 @@
     </ul>
     <img src="Rapport%20DM1_files/islands-paradise-maldive-nature-background-image-landscape-1.jpg" alt="some image" width="500px">
     <h2>
-        Tâche 2</h2>
+        Tâche 2 :Diagramme de classe logiciel</h2>
     <p>
-        ...
-    </p>
-    <p>
-        <span style="font-weight: bold;">Soumetteur: </span>John Smith
-    </p>
-    <table cellpadding="7px">
-        <thead>
-            <tr>
-                <th class="first_col">
-                    Tâche
-                </th>
-                <th>
-                    Eugene
-                </th>
-                <th>
-                    John
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="first_col">
-                    Diagramme de classe
-                </td>
-                <td>
-                    Classes, associations, attributs (50%)
-                </td>
-                <td>
-                    Methodes, contraintes (50%)
-                </td>
-            </tr>
-            <tr>
-                <td class="first_col">
-                    Implémentation
-                </td>
-                <td>
-                    GUI (30%)
-                </td>
-                <td>
-                    Logique (70%)
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <h2>
-        Hypothèses</h2>
-    <p>
-        J'ai supposé que...
-    </p>
-    <h2>
-        Tâche 1</h2>
-    <p>
-        Voici ma solution pour la tâche 1.
+        Ma solution a été d'abord de créé des classes générales pour chacun de ces composants d'un voyage, puis de les dériver en classe plus spécifique pour chacun de type de voyage. Comme cela on s'assure que chaque unité peut avoir une bonne cohésion, mais
+        le couplage n'est pas trop affecté si certaines opérations font appele à plusieurs des composants. Je me suis assuré aussi que la classe Système centralisée facilite l'échange d'information entre les utilisateurs et le reste du logiciel et des
+        autres acteurs comme les compagnies aériennes. Une des autres applications de la généralisation fut la classe Section, Encore une fois beaucoup de ces sections possèdent des attributs en commun mais avec la séparation en classes séparées on assure
+        aussi que certaines valeurs sont respectés, tell que tarif_p qui représente le pourcentage du tarif plein de la compagnie de transport décide ou encore le charactère qui représente la section. Pour les cabines de bateaux cela aide aussi d'avoir
+        une capacité maximal pour éviter un problème lors d'une réservation.
+        <br> Nous avons aussi décidé de relié la classe Système à Siège afin de réduire le couplage lors d'une réservation d'un siège. Un siège compose déjà une section qui compose elle même l'avion, le logiciel assure déjà que le siège appartient à un
+        avion auparavant donc il serait inutile de faire Système -> Voyage -> Transport -> Section -> Siège à chaque réservation.
+        <br>Quand aux classes utilisateurs nous avons au contraire décidé d'éviter une génralisation en ayant une classe unique 'User' qui de dérive en Client et Admin, les raisons derrières sont que déjà leurs interactions avec le Système sont très différentes
+        et possède à part peut être leur nom, aucun attribut commun, cela semblerait donc un peu superflu de créer ce type de classe. De plus c'est aussi par soucis de sécurité, on ne voudrait pas qu'un bug dans le codage ou tout autre problème pourrait
+        rendre certaines fonctionnalités de l'admin accessible au client. C'est aussi pour ça que toutes les fonctions de modifications, créations et suppressions sont associés avec la classe Admin et non Système comment cela aurait pu être fait. Tout
+        de même nous avons tenté d'appliquer le polymorphisme aux opérations de l'Admin le plus possible afin de faciliter l'intéraction avec le Système si jamais des nouveaux types de transports venait à être ajoutés (ou même enlevé).
+
+
+
     </p>
     <ul>
         <li>Voici un <a href="http://www.iro.umontreal.ca/~syriani/courses/file1.txt">lien</a> vers les fichiers.</li>
         <li>Images affichées directement.</li>
     </ul>
     <img src="Rapport%20DM1_files/islands-paradise-maldive-nature-background-image-landscape-1.jpg" alt="some image" width="500px">
-    <h2>
-        Tâche 2</h2>
-    <p>
-        ...
-    </p>
 
 
-</body></html>
+</body>
+
+</html>
