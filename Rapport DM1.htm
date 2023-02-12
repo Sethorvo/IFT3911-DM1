@@ -156,15 +156,23 @@
         rendre certaines fonctionnalités de l'admin accessible au client. C'est aussi pour ça que toutes les fonctions de modifications, créations et suppressions sont associés avec la classe Admin et non Système. Tout
         de même nous avons tenté d'appliquer le polymorphisme aux opérations de l'Admin le plus possible afin de faciliter l'intéraction avec le Système si jamais des nouveaux types de transports venait à être ajoutés (ou même enlevé).
         <br><br> Concernant les diagrammes de séquence, nous avons fait de sorte à ce qu'il soit très précis et compréhensible.
+        
+        <h4>Diagramme Séquence Réserver un siège </h4>
+
         <br>Pour le diagramme Réserver un siège, nous avons pensé que la majorité du travail se ferait à l'intérieur du Système et que le Client aurait peu d'intéraction. Ainsi, le client demande simplement au Système de réserver un siège et celui-ci 
         recherche la liste de siège disponible pour un Voyage. Par la suite, le client choisi le siège qu'il désire réservé et le Système réserve celui-ci pour les 24 prochaines heures. Ceci est fait en créeant un timer dans la database.
+        <br>
+
+    <img src="Design/Diagramme_Sequence_ReserverUnSiege.jpg" alt="Diagramme Reserver un siège"> 
+        <p><br></p>
         
-          
+        <h4>Diagramme Séquence Payer un siège </h4>
+    
         <br>Pour le diagramme Payer un siège, étant donné la nature de la fonction, nous avons mis des certaines alternatives. Tout d'abord le client choisi l'option de payer son siège avec son numéro de Réservation que le Système vérifie la validité 
         à l'aide de la base de donnée. Si celui-ci est invalide, un message d'erreur est retourné au client. Dans le cas contraire, le Système cherche le prix du Siège et demande au client de fournir ses informations personnels dont sa carte de crédit.
         Finalement, le Système vérifie l'authenticité de la carte de crédit et si celle-ci est valide, le client reçoit sa facture et son ticket d'avion.
         <br>
-    <h4>Diagramme Séquence Payer un siège </h4> 
+
     <img src="Design/Diagramme_Sequence_PayerUnSiege.jpg" alt="Diagramme Payer un siège"> 
         <p><br></p>
     
