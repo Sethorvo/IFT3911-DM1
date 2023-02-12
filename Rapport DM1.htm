@@ -38,11 +38,11 @@
         <span style="font-weight: bold;">temps mis: </span>~30 heures
     </p>
     <p>
-        <span style="font-weight: bold;">Nom: </span>Placeholder
+        <span style="font-weight: bold;">Nom: </span>Wassim Berrachedi
         <br>
-        <span style="font-weight: bold;">Matricule: </span>5678
+        <span style="font-weight: bold;">Matricule: </span>20172544
         <br>
-        <span style="font-weight: bold;">Courriel: </span>john.smith@something.com
+        <span style="font-weight: bold;">Courriel: </span>wassim.berrachedi@umontreal.ca
         <br>
         <span style="font-weight: bold;">temps mis: </span>40 heures
     </p>
@@ -61,7 +61,7 @@
                     Alexandre
                 </th>
                 <th>
-                    Placeholder
+                    Wassim
                 </th>
             </tr>
         </thead>
@@ -74,7 +74,7 @@
                     Diagramme conceptuel, operations, attributs (70%)
                 </td>
                 <td>
-                    Placeholder (50%)
+                    Diagramme de classe, operations, attributs (30%)
                 </td>
             </tr>
             <tr>
@@ -85,7 +85,7 @@
                     Diagramme de recherche de vol (20%)
                 </td>
                 <td>
-                    Placeholder (50%)
+                    Diagramme Séquence Systéme, Reserver et Payer un Siege  (80%)
                 </td>
             </tr>
             <tr>
@@ -96,6 +96,7 @@
                     Classes, associations (100%)
                 </td>
                 <td>
+                    (0%)
                 </td>
             </tr>
         </tbody>
@@ -103,30 +104,36 @@
     <h2>
         Hypothèses</h2>
     <p>
-        Pour le diagramme de classe conceptuelle j'ai supposé qu'il fallait s'assurer de créer de faire une conception qui assure une bonne cohésion entre les différents éléments qui composent un vol (siège, transport, hub etc) mais qui tout de même n'affecter
-        pas trop le couplage lorsque l'on implique ces différents éléments pour les différents type de voyage possible. Également car si l'on veut pouvoir coder un bon logiciel il faut anticiper la réutilisation mais faciliter la modification du logiciel.
+        Pour le diagramme de classe conceptuelle j'ai supposé qu'il fallait s'assurer de faire une conception qui assure une bonne cohésion entre les différents éléments qui composent un vol (siège, transport, hub etc), mais qui tout de même n'affecte
+        pas trop le couplage lorsque l'on implique ces différents éléments pour les différents type de voyage possible. Également, car si l'on veut pouvoir coder un bon logiciel il faut anticiper la réutilisation, mais faciliter la modification du logiciel.
         J'ai également supposé qu'il fallait une manière de bien différentié les 2 types d'utilisateurs soulignés dans les consignes.
 
         <br><br>Pour ce qui en est du diagramme de classe logicielle, ma théorie était de continuer à construire sur ces généralisations et d'avoir des méthodes qui en profitent en utilsant le polymorphisme le plus possible, et également m'assurer que
         les attributs de chaque classe soient bien définis et mis dans les bonnes classes pour faciliter ce polymorphisme.
+        
+        <br><br>Concernant les diagramme de séquences système, nous les avons voulu les bâtir de manière très simple et selon les standards UML. 
+        
+        <br><br>Contrairement au diagramme séquences système, nous nous attendions à ce que les 3 diagramme de séquence devront requiérir beaucoup plus de précision.
 
         <br><br>Quand au diagramme de paquet j'ai supposé qu'il fallait s'assure avant tout de bien mettre ensemble les classes dont la cohésion et élevé et montrer les relations entre les différentes sections du logiciel
         <br><br>Pour ce qui relève des contraites OCL il y'a eu plusieurs hypothèses.
 
     </p>
     <h2>
-        Tâche 1 :Diagramme de classe conceptuelle</h2>
+        Tâche 1 :Diagramme de classe conceptuelle/Diagramme de séquence système</h2>
     <p>
         L'une des premières chose que nous avons garder en tête lors de la conception du diagramme de classe a été d'appliquer des généralisations de classe le plus possible pour les différentes classes et instances du logiciel. Notamment pour les Hub, Voyage,
-        Transport et Compagnie. Le raisonnement derrière cela est que premièrement toutes les différentes dérivations de ces classes pour les différents transports (Naval, Aérien, Ferroviaire) possède beaucoup d'attributs et opérations en commun et donc
-        cela évite des répétitions inutile d'attribut. Deuxièmement cela rend le logiciel plus flexible si l'on voudrait soit réutiliser certains de ces modules ou même si l'on voulait rajouter plus tard d'autres types de transport ou voyage.
-        <br>Par exemple il est facile de voir que avec le logiciel tel qu'il est implémenté plus tard une plateforme qui prendrait en compte le transport par automobile tell qu'une plateforme de co-voiturage ou même de location de voiture pourrait utiliser
-        déjà plusieurs de ces classes et attributs sans trop de soucis. D'autant plus que cela aide pour le polymoprhisme des opérations où la plupart sont capable de prendre une sous-classe de celle généralisée et retourneront le résultat attendu. La
-        encore aidant la réutilisation. Également si un type de transport devait être retiré pour diverse raison (exemple le logiciel est utilisé non pas pour un réseau de transport mondial mais plus local qui n'aurait pas certains transports), le logiciel
-        pourrait tout de même fonctionner.
-        <br> On a également décidé de faire en sorte que les compagnies aient leur propre liste de voyage et transport même si le système centrale possède déjà tous les voyages et transport possible, premièrement cela facilite certaines recherches de
-        Client et Admin où il ne faut pas parcourir des base de données entières pour ressortir des données mais également il semblerait logique qu'une compagnie possède déjà ce genre de liste, ce qui nous faciliterait le cout en terme de temps de recherche
+        Transport et Compagnie. Le raisonnement derrière cela est que premièrement, toutes les différentes dérivations de ces classes pour les différents transports (Naval, Aérien, Ferroviaire) possède beaucoup d'attributs et opérations en commun et donc
+        cela évite des répétitions inutile d'attribut. Deuxièmement, cela rend le logiciel plus flexible si l'on voudrait soit réutiliser certains de ces modules ou même si l'on voulait rajouter plus tard d'autres types de transport ou voyage.
+        <br>Par exemple, il est facile de voir que le logiciel tel qu'il est implémenté permet à une plateforme utilisant le transport par automobile pourrait utiliserplusieurs de ces classes et attributs sans trop de soucis. D'autant plus que cela aide pour 
+        le polymoprhisme des opérations où la plupart sont capable de prendre une sous-classe de celle généralisée et retourneront le résultat attendu. Également si un type de transport devait être retiré pour diverse raison 
+        (exemple le logiciel est utilisé non pas pour un réseau de transport mondial mais plus local qui n'aurait pas certains transports), le logiciel pourrait tout de même fonctionner.
+        <br> On a également décidé de faire en sorte que les compagnies aient leur propre liste de voyage et transport même si le système centrale possède déjà tous les voyages et transport possible. Cela facilite certaines recherches de
+        Client et Admin où il ne faut pas parcourir des base de données entières pour ressortir des données, mais également, il semblerait logique qu'une compagnie possède déjà ce genre de liste, ce qui nous faciliterait le cout en terme de temps de recherche
         et stockage.
+        <br>Pour la partie sur les diagrammes de séquence système, nous nous sommes focusés sur les commandes les plus importantes dans un système de voyage. Évidemment, nous avons commencer par les 3 diagrammes demandé dans la tâche 2. Pour généraliser notre
+        travail, nous avons fait que des diagrammes avec un acteur (Client/Admin) et des relations avec le Système. Nos diagrammes sont très simple et permetteront de facilement recréer ceci sur un diagramme de système étant donné leur facilité de
+        compréhension. Pour les autres diagrammes fait nous avons choisi en priorité la création et suppression des différents Compagnie et Station.
 
     </p>
     <ul>
