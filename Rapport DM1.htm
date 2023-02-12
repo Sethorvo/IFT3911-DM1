@@ -131,7 +131,7 @@
         <br> On a également décidé de faire en sorte que les compagnies aient leur propre liste de voyage et transport même si le système centrale possède déjà tous les voyages et transport possible. Cela facilite certaines recherches de
         Client et Admin où il ne faut pas parcourir des base de données entières pour ressortir des données, mais également, il semblerait logique qu'une compagnie possède déjà ce genre de liste, ce qui nous faciliterait le cout en terme de temps de recherche
         et stockage.
-        <br>Pour la partie sur les diagrammes de séquence système, nous nous sommes focusés sur les commandes les plus importantes dans un système de voyage. Évidemment, nous avons commencer par les 3 diagrammes demandé dans la tâche 2. Pour généraliser notre
+        <br><br>Pour la partie sur les diagrammes de séquence système, nous nous sommes focusés sur les commandes les plus importantes dans un système de voyage. Évidemment, nous avons commencer par les 3 diagrammes demandé dans la tâche 2. Pour généraliser notre
         travail, nous avons fait que des diagrammes avec un acteur (Client/Admin) et des relations avec le Système. Nos diagrammes sont très simple et permetteront de facilement recréer ceci sur un diagramme de système étant donné leur facilité de
         compréhension. Pour les autres diagrammes fait nous avons choisi en priorité la création et suppression des différents Compagnie et Station.
 
@@ -142,21 +142,26 @@
     </ul>
     <img src="Rapport%20DM1_files/islands-paradise-maldive-nature-background-image-landscape-1.jpg" alt="some image" width="500px">
     <h2>
-        Tâche 2 :Diagramme de classe logiciel</h2>
+        Tâche 2 :Diagramme de classe logiciel/Diagramme de Séquence</h2>
     <p>
-        Ma solution a été d'abord de créé des classes générales pour chacun de ces composants d'un voyage, puis de les dériver en classe plus spécifique pour chacun de type de voyage. Comme cela on s'assure que chaque unité peut avoir une bonne cohésion, mais
-        le couplage n'est pas trop affecté si certaines opérations font appele à plusieurs des composants. Je me suis assuré aussi que la classe Système centralisée facilite l'échange d'information entre les utilisateurs et le reste du logiciel et des
-        autres acteurs comme les compagnies aériennes. Une des autres applications de la généralisation fut la classe Section, Encore une fois beaucoup de ces sections possèdent des attributs en commun mais avec la séparation en classes séparées on assure
-        aussi que certaines valeurs sont respectés, tell que tarif_p qui représente le pourcentage du tarif plein de la compagnie de transport décide ou encore le charactère qui représente la section. Pour les cabines de bateaux cela aide aussi d'avoir
-        une capacité maximal pour éviter un problème lors d'une réservation.
+        Notre solution a été d'abord de créé des classes générales pour chacun des composants d'un voyage, puis de les dériver en classe plus spécifique pour chaque type de voyage. Ainsi, on s'assure que chaque unité peut avoir une bonne cohésion, mais
+        le couplage n'est pas trop affecté si certaines opérations font appel à plusieurs des composants. Nous nous sommes assuré aussi que la classe Système centralisée facilite l'échange d'information entre les utilisateurs et le reste du logiciel.
+        Une des autres applications de la généralisation est la classe Section. Encore une fois, plusieurs sections possèdent des attributs en commun, mais avec la séparation en classes séparées on assure aussi que certaines valeurs sont respectés, 
+        tel que tarif_p qui représente le pourcentage du tarif plein de la compagnie de transport décide ou encore le charactère qui représente la section. Pour les cabines de bateaux cela aide aussi d'avoir une capacité maximal pour éviter un problème 
+        lors d'une réservation.
         <br> Nous avons aussi décidé de relié la classe Système à Siège afin de réduire le couplage lors d'une réservation d'un siège. Un siège compose déjà une section qui compose elle même l'avion, le logiciel assure déjà que le siège appartient à un
         avion auparavant donc il serait inutile de faire Système -> Voyage -> Transport -> Section -> Siège à chaque réservation.
-        <br>Quand aux classes utilisateurs nous avons au contraire décidé d'éviter une génralisation en ayant une classe unique 'User' qui de dérive en Client et Admin, les raisons derrières sont que déjà leurs interactions avec le Système sont très différentes
-        et possède à part peut être leur nom, aucun attribut commun, cela semblerait donc un peu superflu de créer ce type de classe. De plus c'est aussi par soucis de sécurité, on ne voudrait pas qu'un bug dans le codage ou tout autre problème pourrait
-        rendre certaines fonctionnalités de l'admin accessible au client. C'est aussi pour ça que toutes les fonctions de modifications, créations et suppressions sont associés avec la classe Admin et non Système comment cela aurait pu être fait. Tout
+        <br>Quand aux classes utilisateurs nous avons au contraire décidé d'éviter une génralisation en ayant une classe unique 'User' qui de dérive en Client et Admin, les raisons derrières sont que leurs interactions avec le Système sont très différentes
+        et ne possède excepté leur nom, aucun attribut commun. Cela semble donc un peu superflu de créer ce type de classe. De plus, c'est aussi par soucis de sécurité, on ne voudrait pas qu'un bug dans le codage ou tout autre problème pourrait
+        rendre certaines fonctionnalités de l'admin accessible au client. C'est aussi pour ça que toutes les fonctions de modifications, créations et suppressions sont associés avec la classe Admin et non Système. Tout
         de même nous avons tenté d'appliquer le polymorphisme aux opérations de l'Admin le plus possible afin de faciliter l'intéraction avec le Système si jamais des nouveaux types de transports venait à être ajoutés (ou même enlevé).
-
-
+        <br><br> Concernant les diagrammes de séquence, nous avons fait de sorte à ce qu'il soit très précis et compréhensible.
+        <br>Pour le diagramme Réserver un siège, nous avons pensé que la majorité du travail se ferait à l'intérieur du Système et que le Client aurait peu d'intéraction. Ainsi, le client demande simplement au Système de réserver un siège et celui-ci 
+        recherche la liste de siège disponible pour un Voyage. Par la suite, le client choisi le siège qu'il désire réservé et le Système réserve celui-ci pour les 24 prochaines heures. Ceci est fait en créeant un timer dans la database.
+        <br>Pour le diagramme Payer un siège, étant donné la nature de la fonction, nous avons mis des certaines alternatives. Tout d'abord le client choisi l'option de payer son siège avec son numéro de Réservation que le Système vérifie la validité 
+        à l'aide de la base de donnée. Si celui-ci est invalide, un message d'erreur est retourné au client. Dans le cas contraire, le Système cherche le prix du Siège et demande au client de fournir ses informations personnels dont sa carte de crédit.
+        Finalement, le Système vérifie l'authenticité de la carte de crédit et si celle-ci est valide, le client reçoit sa facture et son ticket d'avion.
+        <br>Pour le diagramme de Recherche d'un Voyage, ... TODO
 
     </p>
     <ul>
