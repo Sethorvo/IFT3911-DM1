@@ -200,7 +200,12 @@
     <h2>
         Tâche 3 :Contraintes OCL</h2>
     <p>
-        
+        Pour les contraintes d'OCL nous nous sommes référés au matériel de classe pour les compléter. Pour les contraintes de Croisière et Vol, nous avons utilisé de simple égalité. Par exemple, inv:self.hub_D == self.hub_A, hub_D et hub_A qui
+        décrive respectivement les hub de départ et d'arrivé, disent qu'une croisière à comme point de d'arrivé son point de départ.
+        <br> Pour les contraintes de Section et Hub nous avons fait une référence à toutes les instances vu qu'elle s'applique à chacune d'entre elles.
+        <br> Finalement, pour les contraintes de réservation et paiement nous avons utilisé les condition pre et post pour décrire leur différent états. Pour la réservation de siège, nous avons comme précondition chercher si le siège désiré et libre. Pour la
+        postcondition nous avons appliqué que le résultat de la fonction est égale au numéro de réservation associé au siège. Pour ce qui est du paiement de siège, la précondition dit que la fonction est permise si le numéro de réservation qu'inscrit le client
+        et le même que le siège. Pour la postcondition, nous settons que le siège n'est plus libre.
     </p> 
     
     <ul>
