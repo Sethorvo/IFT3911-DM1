@@ -12,10 +12,14 @@ context Hub
 	inv: self.ID_hub->size() == 3
 	inv: Section.allInstances()->forAll(h1, h2 | h1.oclType() == h1.oclType() implies h1.ID_hub <> h2.ID_hub)
 
-context Siege :: siegeLibre() :Boolean
-	inv: siegeLibre = false implies self.Systeme.Client -> exists(C : Client | c.paiement = true)
-	
+
 context Client :: reserver() : Integer
-	pre : result = self.Systeme.Siege.numReservation
-	if
-	self.Systeme.Siege.siegeLibre = true 
+	pre : self.Systeme.Siege.siegeLibre = true
+
+	post: result = self.Systeme.Siege.num_reservation
+
+
+context Client :: payerSiege(numReservation : int)
+	pre : self.Systeme.Siege -> exists(S: Siege | self.numReservation == siege.num_reservation)
+
+	post: self.Systeme.Siege.siegeLibre = false
