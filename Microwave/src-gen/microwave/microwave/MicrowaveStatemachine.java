@@ -598,7 +598,7 @@ public class MicrowaveStatemachine implements IMicrowaveStatemachine {
 		
 		sCInterface.operationCallback.display("Finished");
 		
-		sCInterface.operationCallback.beepOff();
+		sCInterface.operationCallback.beepOn();
 	}
 	
 	/* Exit action for state 'cook_active'. */
@@ -1221,8 +1221,6 @@ public class MicrowaveStatemachine implements IMicrowaveStatemachine {
 	
 	/* Default react sequence for initial entry  */
 	private void react_Microwave_System_Cook_Finish_finish__entry_Default() {
-		setTime(5);
-		
 		enterSequence_Microwave_System_Cook_Finish_finish_Finish_on_default();
 	}
 	
@@ -1475,6 +1473,8 @@ public class MicrowaveStatemachine implements IMicrowaveStatemachine {
 					enterSequence_Microwave_System_Cook_Cook_cook_Waiting_default();
 				} else {
 					exitSequence_Microwave_System_Cook_Cook_cook_cook_init();
+					sCInterface.operationCallback.cook();
+					
 					enterSequence_Microwave_System_Cook_Cook_cook_cook_active_default();
 				}
 			}
@@ -1515,7 +1515,7 @@ public class MicrowaveStatemachine implements IMicrowaveStatemachine {
 					} else {
 						if (getTime()<=0) {
 							exitSequence_Microwave_System_Cook_Cook();
-							sCInterface.operationCallback.stopCook();
+							setTime(5);
 							
 							enterSequence_Microwave_System_Cook_Finish_default();
 						} else {
