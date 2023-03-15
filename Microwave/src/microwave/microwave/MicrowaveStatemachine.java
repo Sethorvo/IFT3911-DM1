@@ -127,17 +127,15 @@ public class MicrowaveStatemachine implements IMicrowaveStatemachine {
 		microwave_System_Cook_Timer_timer_digit_4,
 		microwave_System_Cook_Timer_timer_noMoreDigit,
 		microwave_System_Cook_Cook,
-		microwave_System_Cook_Cook_cook_cook_init,
-		microwave_System_Cook_Cook_cook_Waiting,
+		microwave_System_Cook_Cook_cook_Open_Waiting,
 		microwave_System_Cook_Cook_cook_cook_active,
+		microwave_System_Cook_Cook_cook_Close_Idle,
 		microwave_System_Cook_Finish,
 		microwave_System_Cook_Finish_finish_Finish_on,
 		microwave_System_Cook_Finish_finish_Finish_off,
-		microwave_Off,
 		$NullState$
 	};
 	
-	private State[] historyVector = new State[1];
 	private final State[] stateVector = new State[2];
 	
 	private int nextStateIndex;
@@ -201,6 +199,17 @@ public class MicrowaveStatemachine implements IMicrowaveStatemachine {
 	}
 	
 	
+	private boolean ferme;
+	
+	protected boolean getFerme() {
+		return ferme;
+	}
+	
+	protected void setFerme(boolean value) {
+		this.ferme = value;
+	}
+	
+	
 	public MicrowaveStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -217,9 +226,6 @@ public class MicrowaveStatemachine implements IMicrowaveStatemachine {
 		for (int i = 0; i < 2; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		for (int i = 0; i < 1; i++) {
-			historyVector[i] = State.$NullState$;
-		}
 		clearEvents();
 		clearOutEvents();
 		sCInterface.setPower(0);
@@ -233,6 +239,8 @@ public class MicrowaveStatemachine implements IMicrowaveStatemachine {
 		setDigit3(0);
 		
 		setDigit4(0);
+		
+		setFerme(false);
 	}
 	
 	public void enter() {
@@ -287,23 +295,20 @@ public class MicrowaveStatemachine implements IMicrowaveStatemachine {
 			case microwave_System_Cook_Timer_timer_noMoreDigit:
 				microwave_System_Cook_Timer_timer_noMoreDigit_react(true);
 				break;
-			case microwave_System_Cook_Cook_cook_cook_init:
-				microwave_System_Cook_Cook_cook_cook_init_react(true);
-				break;
-			case microwave_System_Cook_Cook_cook_Waiting:
-				microwave_System_Cook_Cook_cook_Waiting_react(true);
+			case microwave_System_Cook_Cook_cook_Open_Waiting:
+				microwave_System_Cook_Cook_cook_Open_Waiting_react(true);
 				break;
 			case microwave_System_Cook_Cook_cook_cook_active:
 				microwave_System_Cook_Cook_cook_cook_active_react(true);
+				break;
+			case microwave_System_Cook_Cook_cook_Close_Idle:
+				microwave_System_Cook_Cook_cook_Close_Idle_react(true);
 				break;
 			case microwave_System_Cook_Finish_finish_Finish_on:
 				microwave_System_Cook_Finish_finish_Finish_on_react(true);
 				break;
 			case microwave_System_Cook_Finish_finish_Finish_off:
 				microwave_System_Cook_Finish_finish_Finish_off_react(true);
-				break;
-			case microwave_Off:
-				microwave_Off_react(true);
 				break;
 			default:
 				// $NullState$
@@ -385,13 +390,13 @@ public class MicrowaveStatemachine implements IMicrowaveStatemachine {
 			return stateVector[1] == State.microwave_System_Cook_Timer_timer_noMoreDigit;
 		case microwave_System_Cook_Cook:
 			return stateVector[1].ordinal() >= State.
-					microwave_System_Cook_Cook.ordinal()&& stateVector[1].ordinal() <= State.microwave_System_Cook_Cook_cook_cook_active.ordinal();
-		case microwave_System_Cook_Cook_cook_cook_init:
-			return stateVector[1] == State.microwave_System_Cook_Cook_cook_cook_init;
-		case microwave_System_Cook_Cook_cook_Waiting:
-			return stateVector[1] == State.microwave_System_Cook_Cook_cook_Waiting;
+					microwave_System_Cook_Cook.ordinal()&& stateVector[1].ordinal() <= State.microwave_System_Cook_Cook_cook_Close_Idle.ordinal();
+		case microwave_System_Cook_Cook_cook_Open_Waiting:
+			return stateVector[1] == State.microwave_System_Cook_Cook_cook_Open_Waiting;
 		case microwave_System_Cook_Cook_cook_cook_active:
 			return stateVector[1] == State.microwave_System_Cook_Cook_cook_cook_active;
+		case microwave_System_Cook_Cook_cook_Close_Idle:
+			return stateVector[1] == State.microwave_System_Cook_Cook_cook_Close_Idle;
 		case microwave_System_Cook_Finish:
 			return stateVector[1].ordinal() >= State.
 					microwave_System_Cook_Finish.ordinal()&& stateVector[1].ordinal() <= State.microwave_System_Cook_Finish_finish_Finish_off.ordinal();
@@ -399,8 +404,6 @@ public class MicrowaveStatemachine implements IMicrowaveStatemachine {
 			return stateVector[1] == State.microwave_System_Cook_Finish_finish_Finish_on;
 		case microwave_System_Cook_Finish_finish_Finish_off:
 			return stateVector[1] == State.microwave_System_Cook_Finish_finish_Finish_off;
-		case microwave_Off:
-			return stateVector[0] == State.microwave_Off;
 		default:
 			return false;
 		}
@@ -478,16 +481,22 @@ public class MicrowaveStatemachine implements IMicrowaveStatemachine {
 	/* Entry action for state 'Ouvert'. */
 	private void entryAction_Microwave_System_Door_Ouvert() {
 		sCInterface.operationCallback.openDoor();
+		
+		setFerme(false);
 	}
 	
 	/* Entry action for state 'Ferme'. */
 	private void entryAction_Microwave_System_Door_Ferme() {
 		sCInterface.operationCallback.closeDoor();
+		
+		setFerme(true);
 	}
 	
 	/* Entry action for state 'Init'. */
 	private void entryAction_Microwave_System_Cook_Init() {
 		sCInterface.operationCallback.clearDisplay();
+		
+		sCInterface.operationCallback.beepOff();
 	}
 	
 	/* Entry action for state 'High'. */
@@ -507,13 +516,17 @@ public class MicrowaveStatemachine implements IMicrowaveStatemachine {
 	/* Entry action for state 'init_display'. */
 	private void entryAction_Microwave_System_Cook_Timer_timer_init_display() {
 		sCInterface.operationCallback.clearDisplay();
+		
+		setTime(0);
 	}
 	
 	/* Entry action for state 'digit_1'. */
 	private void entryAction_Microwave_System_Cook_Timer_timer_digit_1() {
 		setDigit1(sCInterface.getDigitValue());
 		
-		sCInterface.operationCallback.displayTime(getDigit1());
+		setTime(digit1);
+		
+		sCInterface.operationCallback.displayTime(getTime());
 	}
 	
 	/* Entry action for state 'digit_2'. */
@@ -560,26 +573,26 @@ public class MicrowaveStatemachine implements IMicrowaveStatemachine {
 		sCInterface.operationCallback.displayTime(getTime());
 	}
 	
-	/* Entry action for state 'cook_init'. */
-	private void entryAction_Microwave_System_Cook_Cook_cook_cook_init() {
-		sCInterface.operationCallback.cook();
-		
-		sCInterface.operationCallback.displayTime(getTime());
-	}
-	
-	/* Entry action for state 'Waiting'. */
-	private void entryAction_Microwave_System_Cook_Cook_cook_Waiting() {
-		sCInterface.operationCallback.stopCook();
-		
+	/* Entry action for state 'Open_Waiting'. */
+	private void entryAction_Microwave_System_Cook_Cook_cook_Open_Waiting() {
 		sCInterface.operationCallback.display("Waiting");
+		
+		sCInterface.operationCallback.stopCook();
 	}
 	
 	/* Entry action for state 'cook_active'. */
 	private void entryAction_Microwave_System_Cook_Cook_cook_cook_active() {
 		timer.setTimer(this, 0, (1 * 1000), false);
 		
-		setTime((time - 1));
+		sCInterface.operationCallback.cook();
 		
+		sCInterface.operationCallback.displayTime(getTime());
+		
+		setTime((time - 1));
+	}
+	
+	/* Entry action for state 'Close_Idle'. */
+	private void entryAction_Microwave_System_Cook_Cook_cook_Close_Idle() {
 		sCInterface.operationCallback.displayTime(getTime());
 	}
 	
@@ -604,6 +617,8 @@ public class MicrowaveStatemachine implements IMicrowaveStatemachine {
 	/* Exit action for state 'cook_active'. */
 	private void exitAction_Microwave_System_Cook_Cook_cook_cook_active() {
 		timer.unsetTimer(this, 0);
+		
+		sCInterface.operationCallback.stopCook();
 	}
 	
 	/* Exit action for state 'Finish_on'. */
@@ -641,14 +656,11 @@ public class MicrowaveStatemachine implements IMicrowaveStatemachine {
 		entryAction_Microwave_System_Cook_Init();
 		nextStateIndex = 1;
 		stateVector[1] = State.microwave_System_Cook_Init;
-		
-		historyVector[0] = stateVector[1];
 	}
 	
 	/* 'default' enter sequence for state Power */
 	private void enterSequence_Microwave_System_Cook_Power_default() {
 		enterSequence_Microwave_System_Cook_Power_power_default();
-		historyVector[0] = stateVector[1];
 	}
 	
 	/* 'default' enter sequence for state High */
@@ -668,7 +680,6 @@ public class MicrowaveStatemachine implements IMicrowaveStatemachine {
 	/* 'default' enter sequence for state Timer */
 	private void enterSequence_Microwave_System_Cook_Timer_default() {
 		enterSequence_Microwave_System_Cook_Timer_timer_default();
-		historyVector[0] = stateVector[1];
 	}
 	
 	/* 'default' enter sequence for state init_display */
@@ -716,21 +727,13 @@ public class MicrowaveStatemachine implements IMicrowaveStatemachine {
 	/* 'default' enter sequence for state Cook */
 	private void enterSequence_Microwave_System_Cook_Cook_default() {
 		enterSequence_Microwave_System_Cook_Cook_cook_default();
-		historyVector[0] = stateVector[1];
 	}
 	
-	/* 'default' enter sequence for state cook_init */
-	private void enterSequence_Microwave_System_Cook_Cook_cook_cook_init_default() {
-		entryAction_Microwave_System_Cook_Cook_cook_cook_init();
+	/* 'default' enter sequence for state Open_Waiting */
+	private void enterSequence_Microwave_System_Cook_Cook_cook_Open_Waiting_default() {
+		entryAction_Microwave_System_Cook_Cook_cook_Open_Waiting();
 		nextStateIndex = 1;
-		stateVector[1] = State.microwave_System_Cook_Cook_cook_cook_init;
-	}
-	
-	/* 'default' enter sequence for state Waiting */
-	private void enterSequence_Microwave_System_Cook_Cook_cook_Waiting_default() {
-		entryAction_Microwave_System_Cook_Cook_cook_Waiting();
-		nextStateIndex = 1;
-		stateVector[1] = State.microwave_System_Cook_Cook_cook_Waiting;
+		stateVector[1] = State.microwave_System_Cook_Cook_cook_Open_Waiting;
 	}
 	
 	/* 'default' enter sequence for state cook_active */
@@ -740,10 +743,16 @@ public class MicrowaveStatemachine implements IMicrowaveStatemachine {
 		stateVector[1] = State.microwave_System_Cook_Cook_cook_cook_active;
 	}
 	
+	/* 'default' enter sequence for state Close_Idle */
+	private void enterSequence_Microwave_System_Cook_Cook_cook_Close_Idle_default() {
+		entryAction_Microwave_System_Cook_Cook_cook_Close_Idle();
+		nextStateIndex = 1;
+		stateVector[1] = State.microwave_System_Cook_Cook_cook_Close_Idle;
+	}
+	
 	/* 'default' enter sequence for state Finish */
 	private void enterSequence_Microwave_System_Cook_Finish_default() {
 		enterSequence_Microwave_System_Cook_Finish_finish_default();
-		historyVector[0] = stateVector[1];
 	}
 	
 	/* 'default' enter sequence for state Finish_on */
@@ -760,12 +769,6 @@ public class MicrowaveStatemachine implements IMicrowaveStatemachine {
 		stateVector[1] = State.microwave_System_Cook_Finish_finish_Finish_off;
 	}
 	
-	/* 'default' enter sequence for state Off */
-	private void enterSequence_Microwave_Off_default() {
-		nextStateIndex = 0;
-		stateVector[0] = State.microwave_Off;
-	}
-	
 	/* 'default' enter sequence for region Microwave */
 	private void enterSequence_Microwave_default() {
 		react_Microwave__entry_Default();
@@ -779,56 +782,6 @@ public class MicrowaveStatemachine implements IMicrowaveStatemachine {
 	/* 'default' enter sequence for region Cook */
 	private void enterSequence_Microwave_System_Cook_default() {
 		react_Microwave_System_Cook__entry_Default();
-	}
-	
-	/* shallow enterSequence with history in child Cook */
-	private void shallowEnterSequence_Microwave_System_Cook() {
-		switch (historyVector[0]) {
-		case microwave_System_Cook_Init:
-			enterSequence_Microwave_System_Cook_Init_default();
-			break;
-		case microwave_System_Cook_Power_power_High:
-			enterSequence_Microwave_System_Cook_Power_default();
-			break;
-		case microwave_System_Cook_Power_power_Low:
-			enterSequence_Microwave_System_Cook_Power_default();
-			break;
-		case microwave_System_Cook_Timer_timer_init_display:
-			enterSequence_Microwave_System_Cook_Timer_default();
-			break;
-		case microwave_System_Cook_Timer_timer_digit_1:
-			enterSequence_Microwave_System_Cook_Timer_default();
-			break;
-		case microwave_System_Cook_Timer_timer_digit_2:
-			enterSequence_Microwave_System_Cook_Timer_default();
-			break;
-		case microwave_System_Cook_Timer_timer_digit_3:
-			enterSequence_Microwave_System_Cook_Timer_default();
-			break;
-		case microwave_System_Cook_Timer_timer_digit_4:
-			enterSequence_Microwave_System_Cook_Timer_default();
-			break;
-		case microwave_System_Cook_Timer_timer_noMoreDigit:
-			enterSequence_Microwave_System_Cook_Timer_default();
-			break;
-		case microwave_System_Cook_Cook_cook_cook_init:
-			enterSequence_Microwave_System_Cook_Cook_default();
-			break;
-		case microwave_System_Cook_Cook_cook_Waiting:
-			enterSequence_Microwave_System_Cook_Cook_default();
-			break;
-		case microwave_System_Cook_Cook_cook_cook_active:
-			enterSequence_Microwave_System_Cook_Cook_default();
-			break;
-		case microwave_System_Cook_Finish_finish_Finish_on:
-			enterSequence_Microwave_System_Cook_Finish_default();
-			break;
-		case microwave_System_Cook_Finish_finish_Finish_off:
-			enterSequence_Microwave_System_Cook_Finish_default();
-			break;
-		default:
-			break;
-		}
 	}
 	
 	/* 'default' enter sequence for region power */
@@ -938,14 +891,8 @@ public class MicrowaveStatemachine implements IMicrowaveStatemachine {
 		exitSequence_Microwave_System_Cook_Cook_cook();
 	}
 	
-	/* Default exit sequence for state cook_init */
-	private void exitSequence_Microwave_System_Cook_Cook_cook_cook_init() {
-		nextStateIndex = 1;
-		stateVector[1] = State.$NullState$;
-	}
-	
-	/* Default exit sequence for state Waiting */
-	private void exitSequence_Microwave_System_Cook_Cook_cook_Waiting() {
+	/* Default exit sequence for state Open_Waiting */
+	private void exitSequence_Microwave_System_Cook_Cook_cook_Open_Waiting() {
 		nextStateIndex = 1;
 		stateVector[1] = State.$NullState$;
 	}
@@ -956,6 +903,12 @@ public class MicrowaveStatemachine implements IMicrowaveStatemachine {
 		stateVector[1] = State.$NullState$;
 		
 		exitAction_Microwave_System_Cook_Cook_cook_cook_active();
+	}
+	
+	/* Default exit sequence for state Close_Idle */
+	private void exitSequence_Microwave_System_Cook_Cook_cook_Close_Idle() {
+		nextStateIndex = 1;
+		stateVector[1] = State.$NullState$;
 	}
 	
 	/* Default exit sequence for state Finish */
@@ -979,12 +932,6 @@ public class MicrowaveStatemachine implements IMicrowaveStatemachine {
 		exitAction_Microwave_System_Cook_Finish_finish_Finish_off();
 	}
 	
-	/* Default exit sequence for state Off */
-	private void exitSequence_Microwave_Off() {
-		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
-	}
-	
 	/* Default exit sequence for region Microwave */
 	private void exitSequence_Microwave() {
 		switch (stateVector[0]) {
@@ -993,9 +940,6 @@ public class MicrowaveStatemachine implements IMicrowaveStatemachine {
 			break;
 		case microwave_System_Door_Ferme:
 			exitSequence_Microwave_System_Door_Ferme();
-			break;
-		case microwave_Off:
-			exitSequence_Microwave_Off();
 			break;
 		default:
 			break;
@@ -1029,14 +973,14 @@ public class MicrowaveStatemachine implements IMicrowaveStatemachine {
 		case microwave_System_Cook_Timer_timer_noMoreDigit:
 			exitSequence_Microwave_System_Cook_Timer_timer_noMoreDigit();
 			break;
-		case microwave_System_Cook_Cook_cook_cook_init:
-			exitSequence_Microwave_System_Cook_Cook_cook_cook_init();
-			break;
-		case microwave_System_Cook_Cook_cook_Waiting:
-			exitSequence_Microwave_System_Cook_Cook_cook_Waiting();
+		case microwave_System_Cook_Cook_cook_Open_Waiting:
+			exitSequence_Microwave_System_Cook_Cook_cook_Open_Waiting();
 			break;
 		case microwave_System_Cook_Cook_cook_cook_active:
 			exitSequence_Microwave_System_Cook_Cook_cook_cook_active();
+			break;
+		case microwave_System_Cook_Cook_cook_Close_Idle:
+			exitSequence_Microwave_System_Cook_Cook_cook_Close_Idle();
 			break;
 		case microwave_System_Cook_Finish_finish_Finish_on:
 			exitSequence_Microwave_System_Cook_Finish_finish_Finish_on();
@@ -1093,14 +1037,14 @@ public class MicrowaveStatemachine implements IMicrowaveStatemachine {
 		case microwave_System_Cook_Timer_timer_noMoreDigit:
 			exitSequence_Microwave_System_Cook_Timer_timer_noMoreDigit();
 			break;
-		case microwave_System_Cook_Cook_cook_cook_init:
-			exitSequence_Microwave_System_Cook_Cook_cook_cook_init();
-			break;
-		case microwave_System_Cook_Cook_cook_Waiting:
-			exitSequence_Microwave_System_Cook_Cook_cook_Waiting();
+		case microwave_System_Cook_Cook_cook_Open_Waiting:
+			exitSequence_Microwave_System_Cook_Cook_cook_Open_Waiting();
 			break;
 		case microwave_System_Cook_Cook_cook_cook_active:
 			exitSequence_Microwave_System_Cook_Cook_cook_cook_active();
+			break;
+		case microwave_System_Cook_Cook_cook_Close_Idle:
+			exitSequence_Microwave_System_Cook_Cook_cook_Close_Idle();
 			break;
 		case microwave_System_Cook_Finish_finish_Finish_on:
 			exitSequence_Microwave_System_Cook_Finish_finish_Finish_on();
@@ -1156,14 +1100,14 @@ public class MicrowaveStatemachine implements IMicrowaveStatemachine {
 	/* Default exit sequence for region cook */
 	private void exitSequence_Microwave_System_Cook_Cook_cook() {
 		switch (stateVector[1]) {
-		case microwave_System_Cook_Cook_cook_cook_init:
-			exitSequence_Microwave_System_Cook_Cook_cook_cook_init();
-			break;
-		case microwave_System_Cook_Cook_cook_Waiting:
-			exitSequence_Microwave_System_Cook_Cook_cook_Waiting();
+		case microwave_System_Cook_Cook_cook_Open_Waiting:
+			exitSequence_Microwave_System_Cook_Cook_cook_Open_Waiting();
 			break;
 		case microwave_System_Cook_Cook_cook_cook_active:
 			exitSequence_Microwave_System_Cook_Cook_cook_cook_active();
+			break;
+		case microwave_System_Cook_Cook_cook_Close_Idle:
+			exitSequence_Microwave_System_Cook_Cook_cook_Close_Idle();
 			break;
 		default:
 			break;
@@ -1206,17 +1150,7 @@ public class MicrowaveStatemachine implements IMicrowaveStatemachine {
 	
 	/* Default react sequence for initial entry  */
 	private void react_Microwave_System_Cook_Cook_cook__entry_Default() {
-		enterSequence_Microwave_System_Cook_Cook_cook_cook_init_default();
-	}
-	
-	/* Default react sequence for shallow history entry  */
-	private void react_Microwave_System_Cook__entry_Default() {
-		/* Enter the region with shallow history */
-		if (historyVector[0] != State.$NullState$) {
-			shallowEnterSequence_Microwave_System_Cook();
-		} else {
-			enterSequence_Microwave_System_Cook_Init_default();
-		}
+		enterSequence_Microwave_System_Cook_Cook_cook_cook_active_default();
 	}
 	
 	/* Default react sequence for initial entry  */
@@ -1224,6 +1158,11 @@ public class MicrowaveStatemachine implements IMicrowaveStatemachine {
 		setTime(5);
 		
 		enterSequence_Microwave_System_Cook_Finish_finish_Finish_on_default();
+	}
+	
+	/* Default react sequence for initial entry  */
+	private void react_Microwave_System_Cook__entry_Default() {
+		enterSequence_Microwave_System_Cook_Init_default();
 	}
 	
 	private boolean react() {
@@ -1237,7 +1176,7 @@ public class MicrowaveStatemachine implements IMicrowaveStatemachine {
 			if (react()==false) {
 				if (sCInterface.stop) {
 					exitSequence_Microwave_System();
-					enterSequence_Microwave_Off_default();
+					react_Microwave__entry_Default();
 				} else {
 					did_transition = false;
 				}
@@ -1289,7 +1228,6 @@ public class MicrowaveStatemachine implements IMicrowaveStatemachine {
 				if (sCInterface.low) {
 					exitSequence_Microwave_System_Cook_Init();
 					enterSequence_Microwave_System_Cook_Power_power_Low_default();
-					historyVector[0] = stateVector[1];
 				} else {
 					did_transition = false;
 				}
@@ -1348,13 +1286,21 @@ public class MicrowaveStatemachine implements IMicrowaveStatemachine {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
-			if (sCInterface.start) {
+			if (((sCInterface.start) && (getFerme()))) {
 				exitSequence_Microwave_System_Cook_Timer();
-				sCInterface.raiseClose();
-				
 				enterSequence_Microwave_System_Cook_Cook_default();
 			} else {
-				did_transition = false;
+				if (sCInterface.high) {
+					exitSequence_Microwave_System_Cook_Timer();
+					enterSequence_Microwave_System_Cook_Power_default();
+				} else {
+					if (sCInterface.low) {
+						exitSequence_Microwave_System_Cook_Timer();
+						enterSequence_Microwave_System_Cook_Power_power_Low_default();
+					} else {
+						did_transition = false;
+					}
+				}
 			}
 		}
 		return did_transition;
@@ -1465,33 +1411,14 @@ public class MicrowaveStatemachine implements IMicrowaveStatemachine {
 		return did_transition;
 	}
 	
-	private boolean microwave_System_Cook_Cook_cook_cook_init_react(boolean try_transition) {
+	private boolean microwave_System_Cook_Cook_cook_Open_Waiting_react(boolean try_transition) {
 		boolean did_transition = try_transition;
 		
 		if (try_transition) {
 			if (microwave_System_Cook_Cook_react(try_transition)==false) {
-				if (sCInterface.open) {
-					exitSequence_Microwave_System_Cook_Cook_cook_cook_init();
-					enterSequence_Microwave_System_Cook_Cook_cook_Waiting_default();
-				} else {
-					exitSequence_Microwave_System_Cook_Cook_cook_cook_init();
-					enterSequence_Microwave_System_Cook_Cook_cook_cook_active_default();
-				}
-			}
-		}
-		return did_transition;
-	}
-	
-	private boolean microwave_System_Cook_Cook_cook_Waiting_react(boolean try_transition) {
-		boolean did_transition = try_transition;
-		
-		if (try_transition) {
-			if (microwave_System_Cook_Cook_react(try_transition)==false) {
-				if (sCInterface.start) {
-					exitSequence_Microwave_System_Cook_Cook_cook_Waiting();
-					sCInterface.raiseClose();
-					
-					enterSequence_Microwave_System_Cook_Cook_cook_cook_init_default();
+				if (sCInterface.close) {
+					exitSequence_Microwave_System_Cook_Cook_cook_Open_Waiting();
+					enterSequence_Microwave_System_Cook_Cook_cook_Close_Idle_default();
 				} else {
 					did_transition = false;
 				}
@@ -1507,20 +1434,41 @@ public class MicrowaveStatemachine implements IMicrowaveStatemachine {
 			if (microwave_System_Cook_Cook_react(try_transition)==false) {
 				if (sCInterface.open) {
 					exitSequence_Microwave_System_Cook_Cook_cook_cook_active();
-					enterSequence_Microwave_System_Cook_Cook_cook_Waiting_default();
+					setTime((time + 1));
+					
+					enterSequence_Microwave_System_Cook_Cook_cook_Open_Waiting_default();
 				} else {
-					if (timeEvents[0]) {
-						exitSequence_Microwave_System_Cook_Cook_cook_cook_active();
-						enterSequence_Microwave_System_Cook_Cook_cook_cook_active_default();
+					if (getTime()<0) {
+						exitSequence_Microwave_System_Cook_Cook();
+						enterSequence_Microwave_System_Cook_Finish_default();
 					} else {
-						if (getTime()<=0) {
-							exitSequence_Microwave_System_Cook_Cook();
-							sCInterface.operationCallback.stopCook();
-							
-							enterSequence_Microwave_System_Cook_Finish_default();
+						if (((timeEvents[0]) && (getTime()>=0))) {
+							exitSequence_Microwave_System_Cook_Cook_cook_cook_active();
+							enterSequence_Microwave_System_Cook_Cook_cook_cook_active_default();
 						} else {
 							did_transition = false;
 						}
+					}
+				}
+			}
+		}
+		return did_transition;
+	}
+	
+	private boolean microwave_System_Cook_Cook_cook_Close_Idle_react(boolean try_transition) {
+		boolean did_transition = try_transition;
+		
+		if (try_transition) {
+			if (microwave_System_Cook_Cook_react(try_transition)==false) {
+				if (sCInterface.open) {
+					exitSequence_Microwave_System_Cook_Cook_cook_Close_Idle();
+					enterSequence_Microwave_System_Cook_Cook_cook_Open_Waiting_default();
+				} else {
+					if (((sCInterface.start) && (getFerme()))) {
+						exitSequence_Microwave_System_Cook_Cook_cook_Close_Idle();
+						enterSequence_Microwave_System_Cook_Cook_cook_cook_active_default();
+					} else {
+						did_transition = false;
 					}
 				}
 			}
@@ -1570,23 +1518,6 @@ public class MicrowaveStatemachine implements IMicrowaveStatemachine {
 					setTime((time - 1));
 					
 					enterSequence_Microwave_System_Cook_Finish_finish_Finish_on_default();
-				} else {
-					did_transition = false;
-				}
-			}
-		}
-		return did_transition;
-	}
-	
-	private boolean microwave_Off_react(boolean try_transition) {
-		boolean did_transition = try_transition;
-		
-		if (try_transition) {
-			if (react()==false) {
-				if (sCInterface.stop) {
-					exitSequence_Microwave_Off();
-					enterSequence_Microwave_System_Door_default();
-					react_Microwave_System_Cook__entry_Default();
 				} else {
 					did_transition = false;
 				}
