@@ -1,0 +1,245 @@
+<html data-lt-installed="true">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>IFT3911 DM2</title>
+    <style type="text/css">
+        table {
+            border: outset 2px black;
+            border-collapse: collapse;
+        }
+        
+        th {
+            border-bottom: double 2px black;
+        }
+        
+        td {
+            border-bottom: solid 1px black;
+        }
+        
+        .first_col {
+            border-right: double 2px black;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="text-align: center;">
+        IFT 3911 - Devoir 2</h1>
+    <h2>
+        Information générale</h2>
+    <p>
+        <span style="font-weight: bold;">Nom: </span>Alexandre Eyrolle
+        <br>
+        <span style="font-weight: bold;">Matricule: </span>4593
+        <br>
+        <span style="font-weight: bold;">Courriel: </span>alexandre.eyrolle@umontreal.ca
+        <br>
+        <span style="font-weight: bold;">temps mis: </span>20 heures
+    </p>
+    <p>
+        <span style="font-weight: bold;">Nom: </span>Wassim Berrachedi
+        <br>
+        <span style="font-weight: bold;">Matricule: </span>2544
+        <br>
+        <span style="font-weight: bold;">Courriel: </span>wassim.berrachedi@umontreal.ca
+        <br>
+        <span style="font-weight: bold;">temps mis: </span>40 heures
+    </p>
+    <p>
+        <span style="font-weight: bold;">Nom: </span>Placeholder
+        <br>
+        <span style="font-weight: bold;">Matricule: </span>Placeholder
+        <br>
+        <span style="font-weight: bold;">Courriel: </span>@umontreal.ca
+        <br>
+        <span style="font-weight: bold;">temps mis: </span>0 heures
+    </p>
+    <h2>
+        Distribution des tâches</h2>
+    <p>
+        <span style="font-weight: bold;">Soumetteur: </span>Alexandre Eyrolle
+    </p>
+    <table cellpadding="7px">
+        <thead>
+            <tr>
+                <th class="first_col">
+                    Tâche
+                </th>
+                <th>
+                    Alexandre
+                </th>
+                <th>
+                    Wassim
+                </th>
+                <th>
+                    Placeholder
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="first_col">
+                    Réseau de Pétri
+                </td>
+                <td>
+                    (0%)
+                </td>
+                <td>
+                    (0%)
+                </td>
+                <td>
+                    Tout (100%)
+                </td>
+            </tr>
+            <tr>
+                <td class="first_col">
+                    Statchart
+                </td>
+                <td>
+                    Tout (100%)
+                </td>
+                <td>
+                    (0%)
+                </td>
+                <td>
+                    (0%)
+                </td>
+            </tr>
+            <tr>
+                <td class="first_col">
+                    Design logiciel
+                </td>
+                <td>
+                    Interfaces clients, admin, hub, transport et voyage dans diagramme de classe (10%)
+                </td>
+                <td>
+                    (90%)
+                </td>
+                <td>
+                    (0%)
+                </td>
+            </tr>
+            <tr>
+                <td class="first_col">
+                    Qualité du design
+                </td>
+                <td>
+                    (0%)
+                </td>
+                <td>
+                    (100%)
+                </td>
+                <td>
+                    (0%)
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <h2>
+        Hypothèses</h2>
+    <p>
+
+
+    </p>
+    <h2>
+        Tâche 1 :Réseau de Pétri</h2>
+    <p>
+
+
+    </p>
+    <h2>
+        Tâche 2 :Statechart</h2>
+    <p>
+        Pour la création du statechart plusieurs décisions ont été prises, l'une des première a été de faire du système d'ouverture et fermeture de la porte parallèle au reste de la logique du système, cela avait notamment 2 avantages, premièrement
+        est que cela reflétait le fonctionnement d'un micro-onde réel plus fidèlement, où l'ouverture et fermeture peut se faire en tout temps. Deuxièmement cela permettait d'avoir aussi une variable booléenne interne qui indique si la porte est 
+        fermé ou non ce qui est utile quand à l'état de cuisson du micro-onde pour savoir si la cuisson peut avoir lieu ou non. Quand au power nous avons laisser la posibilité à un utilisateur de choisir la puissance de l'une à l'autre sans problème
+        mais également quand il est rendu à la partie Timer déjà. Encore une fois dans le but de simuler plus fidèlement un vrai micro-onde où on aimerait pouvoir retourner en arrière sans tout recommencer du début. Pour le Timer nous avons décidé
+        de s'en tenir aux secondes uniquements et pas les minutes dans un soucis de simplicité lorsque le décompte sera fait, de plus la spécification de l'application ne mentionnait que les secondes. Pour la cuisson, le open rajoute 1s encore une fois
+        dans un soucis de fidélité, lorsque l'on ouvre un micro-onde à 0:33 par exemple et qu'on le redémarre, on s'attend à voir toujours 0:33 même si la seconde s'était écoulée lors de la cuisson, cela aidait donc à garder cet aspect et aussi pour s'assurer
+        que si un utilisateur ouvre la porte à 0:00, le temps ne puisse jamais afficher une valeur négative même si techniquement il ne reste plus de temps. Le stop réinitialise tout le micro-onde car un historique serait couteux pour un processus aussi simple
+        que de faire fonctionner un micro-onde, de plus le statechart prévoi déjà l'option de retourner en arrière pour la puissance, et d'arrêter et redémarrer la cuisson. Le seul intérêt aurait été peut être pour le timer mais encore une fois si l'utilisateur
+        appui sur stop le seul autre bouton qu'il doit presser ensuite est high ou low avant de retourner au timer semblant assez faible comme justification pour un historique profond ou superficiel.
+
+        <img src="Microwave/images/microwave_0.png" alt="Statechart de micro-onde" width="1800"> 
+    </p> 
+    
+    <h2>
+        Tâche 3 :Diagramme de classe logiciel/Diagramme de Séquence</h2>
+    <p>
+        Notre solution a été d'abord de créé des classes générales pour chacun des composants d'un voyage, puis de les dériver en classe plus spécifique pour chaque type de voyage. Ainsi, on s'assure que chaque unité peut avoir une bonne cohésion, mais
+        le couplage n'est pas trop affecté si certaines opérations font appel à plusieurs des composants. Nous nous sommes assuré aussi que la classe Système centralisée facilite l'échange d'information entre les utilisateurs et le reste du logiciel.
+        Une des autres applications de la généralisation est la classe Section. Encore une fois, plusieurs sections possèdent des attributs en commun, mais avec chaque Section ayant une classe distincte on assure aussi que certaines valeurs sont respectés, 
+        tel que tarif_p qui représente le pourcentage du tarif plein de la compagnie de transport décide ou encore le charactère qui représente la section. Pour les cabines de bateaux cela aide aussi à avoir une capacité maximale pour éviter un problème 
+        lors d'une réservation.
+        <br> Nous avons aussi décidé de relier la classe Système à Siège afin de réduire le couplage lors d'une réservation d'un siège. Un siège compose déjà une section qui compose elle même le transport, 
+        donc il serait inutile de faire Système -> Voyage -> Transport -> Section -> Siège à chaque réservation.
+        <br>Quand aux classes utilisateurs nous avons au contraire décidé d'éviter une généralisation en ayant une classe unique 'User' qui se dérive en Client et Admin, les raisons derrières sont que leurs interactions avec le Système sont très différentes
+        et ne possède excepté leur nom, aucun attribut commun. Cela semble donc un peu superflu de créer ce type de classe. De plus, c'est aussi par soucis de sécurité, on ne voudrait pas qu'un accident lors du login ou tout autre problème pourrait
+        rendre certaines fonctionnalités de l'admin accessible au client. C'est aussi pour ça que toutes les fonctions de modifications, créations et suppressions sont associés avec la classe Admin et non Système. Tout
+        de même nous avons tenté d'appliquer le polymorphisme aux opérations de l'Admin le plus possible afin de faciliter l'intéraction avec le Système si jamais des nouveaux types de transports venait à être ajoutés (ou même enlevé).
+        <br>
+
+    <img src="Design/Diagramme_de_Classe.jpg" alt="Diagramme de classe" width="1800"> 
+        <p><br></p>
+        
+        
+        <br><br> Concernant les diagrammes de séquence, nous avons fait de sorte à ce qu'il soit très précis et compréhensible.
+        
+        <h4>Diagramme Séquence Réserver un siège </h4>
+
+        <br>Pour le diagramme Réserver un siège, nous avons pensé que la majorité du travail se ferait à l'intérieur du Système et que le Client aurait peu d'intéraction. Ainsi, le client demande simplement au Système de réserver un siège et celui-ci 
+        recherche la liste de siège disponible pour un Voyage. Par la suite, le client choisi le siège qu'il désire réservé et le Système réserve celui-ci pour les 24 prochaines heures. Ceci est fait en créeant un timer dans la database.
+        <br>
+
+    <img src="Design/Diagramme_Sequence_ReserverUnSiege.jpg" alt="Diagramme Reserver un siège" width="1800"> 
+        <p><br></p>
+        
+        <h4>Diagramme Séquence Payer un siège </h4>
+    
+        <br>Pour le diagramme Payer un siège, étant donné la nature de la fonction, nous avons mis des certaines alternatives. Tout d'abord le client choisi l'option de payer son siège avec son numéro de Réservation que le Système vérifie la validité 
+        à l'aide de la base de donnée. Si celui-ci est invalide, un message d'erreur est retourné au client. Dans le cas contraire, le Système cherche le prix du Siège et demande au client de fournir ses informations personnels dont sa carte de crédit.
+        Finalement, le Système vérifie l'authenticité de la carte de crédit et si celle-ci est valide, le client reçoit sa facture et son ticket d'avion.
+        <br>
+
+    <img src="Design/Diagramme_Sequence_PayerUnSiege.jpg" alt="Diagramme Payer un siège" width="1800"> 
+        <p><br></p>
+    
+        <h4>Diagramme Séquence Vérification Vols/Lignes/Itinéraires </h4>
+    
+        <br>Pour le diagramme de Recherche d'un Voyage, le système est assez simple et linéaire, nous n'avons pas jugé bon de créer de scénarios alternatifs car rien ne changerait vraiment le fonctionnement du programme, le logiciel se contente déjà de scanner les voyages
+        et si ils n'ont aucune place de libre ils ne sont pas ajouté à la liste, si la liste est vide encore une fois rien ne change le Client aura juste une page disant Voyage non disponible.
+    
+        <br>
+
+    <img src="Design/Diagramme_Sequence_RechercheVoyage.jpg" alt="Diagramme Recherche Voyage" width="1800"> 
+        <p><br></p>
+
+        <h4>Diagramme de Paquets </h4>
+    
+        <br>À NE PAS OUBLIER CETTE FOIS CI
+    
+        <br>
+
+    <img src="Domaine/Diagramme de paquets.png" alt="Diagramme de paquets" width="1800"> 
+
+    </p>
+    <ul>
+        <li>Voici un <a href="https://github.com/Sethorvo/IFT3911-DM1/tree/main/Design">lien</a> vers les fichiers.</li>
+    </ul>
+
+
+    <h2>
+        Tâche 4 :</h2>
+    <p>
+
+    </p> 
+    
+    <ul>
+        <a href=""></a>
+    </ul>
+
+
+</body>
+
+</html>
