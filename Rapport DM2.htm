@@ -270,6 +270,58 @@ En utilisant la loi de conservation et en observant le graphe de couverture, il 
         Nous avons encore une fois une cohésion forte pour ces classes-là. 
         
         <br><br>
+        <h4>Fardeau </h4>
+    
+                <table class="item">
+            <thead>
+                <th>Classe</th>
+                <th>Fardeau</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>I_Client</td>
+                    <td>ref= {List, Section, Client, Voyage, VoyageController, Paiement, PaiementController,
+                                     Siege, SiegeController, Transport, Systeme, Database, Compagnie, Client, 
+                                     double, Date, String, int, boolean, char}  F(I_Client) = 20 </td>
+                </tr>
+                <tr>
+                    <td>Client</td>
+                    <td>ref= {String, int}  F(Client)= 2</td>
+                </tr>
+                 <tr>
+                    <td>I_Admin</td>
+                    <td>ref= {Admin, Systeme, I_Client, Database, Section, Voyage, VoyageController, Transport, Compagnie, Paiment, PaiementController,
+                                     Siege, SiegeController, Client, List, double, Date, String, int, boolean}  F(I_Admin) = 20</td>
+                </tr>
+                <tr>
+                    <td>Admin</td>
+                    <td>ref={String}  F(Admin) = 1</td>
+                </tr>
+                <tr>
+                    <td>Database</td>
+                    <td>ref={String, int} F(Database) = 2</td>
+                </tr>
+  			<tr>
+                    <td>Transport</td>
+                    <td>ref={Section, Siege, Disposition, Compagnie, Voyage, Client, List, String, Boolean, int, char} F(Transport)= 11</td>
+                </tr>
+
+                <tr>
+                    <td>Section</td>
+                    <td>ref={Siege, Disposition, Transport, Compagnie, Voyage, Client, List, String, Boolean, int, char} F(Section)= 11</td>
+                </tr>
+                <tr>
+                    <td>Famille_D, Famille, Suite, Vue_O...</td>
+                    <td>ref={Section,Siege, Disposition, Transport, Compagnie, Voyage, Client, List, String, Boolean, int, char) F=12</td>
+                </tr>
+                <tr>
+                    <td>Voyage</td>
+                    <td>ref={Section, Voyage, VoyageController, Transport, Compagnie, Siege, Client, List, double, Date, String, int, boolean}} F(Section)= 12</td>
+                </tr>
+              </tbody>
+           </table>
+        
+        <br><br>
         
         En ce qui concerne la justification de l’application des principes de conception, nous avons fait de notre mieux pour les appliquer à notre diagramme.
         
