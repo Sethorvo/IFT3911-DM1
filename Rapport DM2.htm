@@ -35,7 +35,7 @@
         <br>
         <span style="font-weight: bold;">Courriel: </span>alexandre.eyrolle@umontreal.ca
         <br>
-        <span style="font-weight: bold;">temps mis: </span>20 heures
+        <span style="font-weight: bold;">temps mis: </span>40 heures
     </p>
     <p>
         <span style="font-weight: bold;">Nom: </span>Wassim Berrachedi
@@ -49,7 +49,7 @@
     <p>
         <span style="font-weight: bold;">Nom: </span>Sami Sabri
         <br>
-        <span style="font-weight: bold;">Matricule: </span>20113533
+        <span style="font-weight: bold;">Matricule: </span>3533
         <br>
         <span style="font-weight: bold;">Courriel: </span>sami.sabri@umontreal.ca
         <br>
@@ -73,7 +73,7 @@
                     Wassim
                 </th>
                 <th>
-                    Placeholder
+                    Sami
                 </th>
             </tr>
         </thead>
@@ -136,8 +136,6 @@
             </tr>
         </tbody>
     </table>
-    <h2>
-        Hypothèses</h2>
 
 <h2>
         Tâche 1 :Réseau de Pétri</h2>
@@ -181,11 +179,11 @@ En utilisant la loi de conservation et en observant le graphe de couverture, il 
     <p>
         Pour la création du statechart plusieurs décisions ont été prises, l'une des première a été de faire du système d'ouverture et fermeture de la porte parallèle au reste de la logique du système, cela avait notamment 2 avantages, premièrement
         est que cela reflétait le fonctionnement d'un micro-onde réel plus fidèlement, où l'ouverture et fermeture peut se faire en tout temps. Deuxièmement cela permettait d'avoir aussi une variable booléenne interne qui indique si la porte est 
-        fermé ou non ce qui est utile quand à l'état de cuisson du micro-onde pour savoir si la cuisson peut avoir lieu ou non. Quand au power nous avons laisser la posibilité à un utilisateur de choisir la puissance de l'une à l'autre sans problème
-        mais également quand il est rendu à la partie Timer déjà. Encore une fois dans le but de simuler plus fidèlement un vrai micro-onde où on aimerait pouvoir retourner en arrière sans tout recommencer du début. Pour le Timer nous avons décidé
-        de s'en tenir aux secondes uniquements et pas les minutes dans un soucis de simplicité lorsque le décompte sera fait, de plus la spécification de l'application ne mentionnait que les secondes. Pour la cuisson, le open rajoute 1s encore une fois
+        fermé ou non ce qui est utile quand à l'état de cuisson du micro-onde pour savoir si la cuisson peut avoir lieu ou non. <br> <br>Quand au power nous avons laisser la posibilité à un utilisateur de choisir la puissance de l'une à l'autre sans problème
+        mais également quand il est rendu à la partie Timer déjà. Encore une fois dans le but de simuler plus fidèlement un vrai micro-onde où on aimerait pouvoir retourner en arrière sans tout recommencer du début. <br> <br>Pour le Timer nous avons décidé
+        de s'en tenir aux secondes uniquements et pas les minutes dans un soucis de simplicité lorsque le décompte sera fait, de plus la spécification de l'application ne mentionnait que les secondes. <br> <br>Pour la cuisson, le open rajoute 1s encore une fois
         dans un soucis de fidélité, lorsque l'on ouvre un micro-onde à 0:33 par exemple et qu'on le redémarre, on s'attend à voir toujours 0:33 même si la seconde s'était écoulée lors de la cuisson, cela aidait donc à garder cet aspect et aussi pour s'assurer
-        que si un utilisateur ouvre la porte à 0:00, le temps ne puisse jamais afficher une valeur négative même si techniquement il ne reste plus de temps. Le stop réinitialise tout le micro-onde car un historique serait couteux pour un processus aussi simple
+        que si un utilisateur ouvre la porte à 0:00, le temps ne puisse jamais afficher une valeur négative même si techniquement il ne reste plus de temps. <br> <br>Le stop réinitialise tout le micro-onde car un historique serait couteux pour un processus aussi simple
         que de faire fonctionner un micro-onde, de plus le statechart prévoi déjà l'option de retourner en arrière pour la puissance, et d'arrêter et redémarrer la cuisson. Le seul intérêt aurait été peut être pour le timer mais encore une fois si l'utilisateur
         appui sur stop le seul autre bouton qu'il doit presser ensuite est high ou low avant de retourner au timer semblant assez faible comme justification pour un historique profond ou superficiel.
 
