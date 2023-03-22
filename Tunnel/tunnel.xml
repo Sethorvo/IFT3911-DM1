@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<pnml>
+    <net>
+        <token id="Default" red="0" green="0" blue="0"/>
+        <place id="P3 : sortie rive Sud">
+            <graphics>
+                <position x="617.0" y="380.0"/>
+            </graphics>
+            <name>
+                <value>P3 : sortie rive Sud</value>
+                <graphics>
+                    <offset x="61.0" y="42.0"/>
+                </graphics>
+            </name>
+            <capacity>
+                <value>0</value>
+            </capacity>
+            <initialMarking>
+                <graphics>
+                    <offset x="0.0" y="0.0"/>
+                </graphics>
+                <value></value>
+            </initialMarking>
+        </place>
+        <place id="P4 : tunnel">
+            <graphics>
+                <position x="359.0" y="277.0"/>
+            </graphics>
+            <name>
+                <value>P4 : tunnel</value>
+                <graphics>
+                    <offset x="40.0" y="48.0"/>
+                </graphics>
+            </name>
+            <capacity>
+                <value>1</value>
+            </capacity>
+            <initialMarking>
+                <graphics>
+                    <offset x="0.0" y="0.0"/>
+                </graphics>
+                <value></value>
+            </initialMarking>
+        </place>
+        <place id="P1 : entrée rive Sud">
+            <graphics>
+                <position x="620.0" y="201.0"/>
+            </graphics>
+            <name>
+                <value>P1 : entrée rive Sud</value>
+                <graphics>
+                    <offset x="63.0" y="49.0"/>
+                </graphics>
+            </name>
+            <capacity>
+                <value>1</value>
+            </capacity>
+            <initialMarking>
+                <graphics>
+                    <offset x="0.0" y="0.0"/>
+                </graphics>
+                <value>Default,1</value>
+            </initialMarking>
+        </place>
+        <place id="P0 : entrée Montréal">
+            <graphics>
+                <position x="140.0" y="197.0"/>
+            </graphics>
+            <name>
+                <value>P0 : entrée Montréal</value>
+                <graphics>
+                    <offset x="-4.0" y="19.0"/>
+                </graphics>
+            </name>
+            <capacity>
+                <value>1</value>
+            </capacity>
+            <initialMarking>
+                <graphics>
+                    <offset x="0.0" y="0.0"/>
+                </graphics>
+                <value>Default,1</value>
+            </initialMarking>
+        </place>
+        <place id="P6 : lumière rive Sud">
+            <graphics>
+                <position x="439.0" y="31.0"/>
+            </graphics>
+            <name>
+                <value>P6 : lumière rive Sud</value>
+                <graphics>
+                    <offset x="71.0" y="-1.0"/>
+                </graphics>
+            </name>
+            <capacity>
+                <value>0</value>
+            </capacity>
+            <initialMarking>
+                <graphics>
+                    <offset x="0.0" y="0.0"/>
+                </graphics>
+                <value></value>
+            </initialMarking>
+        </place>
+        <place id="P5 : lumière Montréal">
+            <graphics>
+                <position x="303.0" y="32.0"/>
+            </graphics>
+            <name>
+                <value>P5 : lumière Montréal</value>
+                <graphics>
+                    <offset x="70.0" y="-3.0"/>
+                </graphics>
+            </name>
+            <capacity>
+                <value>0</value>
+            </capacity>
+            <initialMarking>
+                <graphics>
+                    <offset x="0.0" y="0.0"/>
+                </graphics>
+                <value></value>
+            </initialMarking>
+        </place>
+        <place id="P2 : sortie Montréal">
+            <graphics>
+                <position x="141.0" y="378.0"/>
+            </graphics>
+            <name>
+                <value>P2 : sortie Montréal</value>
+                <graphics>
+                    <offset x="-6.0" y="21.0"/>
+                </graphics>
+            </name>
+            <capacity>
+                <value>1</value>
+            </capacity>
+            <initialMarking>
+                <graphics>
+                    <offset x="0.0" y="0.0"/>
+                </graphics>
+                <value>Default,0</value>
+            </initialMarking>
+        </place>
+        <transition id="T3 : sortie rive Sud">
+            <graphics>
+                <position x="520.0" y="380.0"/>
+            </graphics>
+            <name>
+                <value>T3 : sortie rive Sud</value>
+                <graphics>
+                    <offset x="-4.0" y="31.0"/>
+                </graphics>
+            </name>
+            <infiniteServer>
+                <value>false</value>
+            </infiniteServer>
+            <timed>
+                <value>false</value>
+            </timed>
+            <priority>
+                <value>1</value>
+            </priority>
+            <orientation>
+                <value>0</value>
+            </orientation>
+            <rate>
+                <value>1</value>
+            </rate>
+        </transition>
+        <transition id="T2 : sortie Montréal">
+            <graphics>
+                <position x="231.0" y="377.0"/>
+            </graphics>
+            <name>
+                <value>T2 : sortie Montréal</value>
+                <graphics>
+                    <offset x="114.0" y="31.0"/>
+                </graphics>
+            </name>
+            <infiniteServer>
+                <value>false</value>
+            </infiniteServer>
+            <timed>
+                <value>false</value>
+            </timed>
+            <priority>
+                <value>1</value>
+            </priority>
+            <orientation>
+                <value>0</value>
+            </orientation>
+            <rate>
+                <value>1</value>
+            </rate>
+        </transition>
+        <transition id="T4 : feu Montréal">
+            <graphics>
+                <position x="216.0" y="32.0"/>
+            </graphics>
+            <name>
+                <value>T4 : feu Montréal</value>
+                <graphics>
+                    <offset x="-3.0" y="20.0"/>
+                </graphics>
+            </name>
+            <infiniteServer>
+                <value>false</value>
+            </infiniteServer>
+            <timed>
+                <value>true</value>
+            </timed>
+            <priority>
+                <value>1</value>
+            </priority>
+            <orientation>
+                <value>0</value>
+            </orientation>
+            <rate>
+                <value>1</value>
+            </rate>
+        </transition>
+        <transition id="T0 : entrée Montréal">
+            <graphics>
+                <position x="251.0" y="197.0"/>
+            </graphics>
+            <name>
+                <value>T0 : entrée Montréal</value>
+                <graphics>
+                    <offset x="119.0" y="18.0"/>
+                </graphics>
+            </name>
+            <infiniteServer>
+                <value>false</value>
+            </infiniteServer>
+            <timed>
+                <value>false</value>
+            </timed>
+            <priority>
+                <value>1</value>
+            </priority>
+            <orientation>
+                <value>0</value>
+            </orientation>
+            <rate>
+                <value>1</value>
+            </rate>
+        </transition>
+        <transition id="T5 : feu rive Sud">
+            <graphics>
+                <position x="569.0" y="28.0"/>
+            </graphics>
+            <name>
+                <value>T5 : feu rive Sud</value>
+                <graphics>
+                    <offset x="-1.0" y="32.0"/>
+                </graphics>
+            </name>
+            <infiniteServer>
+                <value>false</value>
+            </infiniteServer>
+            <timed>
+                <value>true</value>
+            </timed>
+            <priority>
+                <value>1</value>
+            </priority>
+            <orientation>
+                <value>0</value>
+            </orientation>
+            <rate>
+                <value>1</value>
+            </rate>
+        </transition>
+        <transition id="T1 : entrée rive Sud">
+            <graphics>
+                <position x="501.0" y="200.0"/>
+            </graphics>
+            <name>
+                <value>T1 : entrée rive Sud</value>
+                <graphics>
+                    <offset x="-2.0" y="14.0"/>
+                </graphics>
+            </name>
+            <infiniteServer>
+                <value>false</value>
+            </infiniteServer>
+            <timed>
+                <value>false</value>
+            </timed>
+            <priority>
+                <value>1</value>
+            </priority>
+            <orientation>
+                <value>0</value>
+            </orientation>
+            <rate>
+                <value>1</value>
+            </rate>
+        </transition>
+        <arc id="T1 : entrée rive Sud TO P4 : tunnel" source="T1 : entrée rive Sud" target="P4 : tunnel">
+            <arcpath id="" x="501.0" y="215.0" curvePoint="false"/>
+            <arcpath id="" x="387.0" y="284.0" curvePoint="false"/>
+            <type value="normal"/>
+            <inscription>
+                <value>Default,1</value>
+            </inscription>
+        </arc>
+        <arc id="T2 : sortie Montréal TO P2 : sortie Montréal" source="T2 : sortie Montréal" target="P2 : sortie Montréal">
+            <arcpath id="" x="231.0" y="392.0" curvePoint="false"/>
+            <arcpath id="" x="171.0" y="393.0" curvePoint="false"/>
+            <type value="normal"/>
+            <inscription>
+                <value>Default,1</value>
+            </inscription>
+        </arc>
+        <arc id="T0 : entrée Montréal TO P4 : tunnel" source="T0 : entrée Montréal" target="P4 : tunnel">
+            <arcpath id="" x="261.0" y="212.0" curvePoint="false"/>
+            <arcpath id="" x="362.0" y="284.0" curvePoint="false"/>
+            <type value="normal"/>
+            <inscription>
+                <value>Default,1</value>
+            </inscription>
+        </arc>
+        <arc id="T1 : entrée rive Sud TO P6 : lumière rive Sud" source="T1 : entrée rive Sud" target="P6 : lumière rive Sud">
+            <arcpath id="" x="506.0" y="200.0" curvePoint="false"/>
+            <arcpath id="" x="458.0" y="60.0" curvePoint="false"/>
+            <type value="normal"/>
+            <inscription>
+                <value>Default,1</value>
+            </inscription>
+        </arc>
+        <arc id="T0 : entrée Montréal TO P5 : lumière Montréal" source="T0 : entrée Montréal" target="P5 : lumière Montréal">
+            <arcpath id="" x="256.0" y="197.0" curvePoint="false"/>
+            <arcpath id="" x="313.0" y="61.0" curvePoint="false"/>
+            <type value="normal"/>
+            <inscription>
+                <value>Default,1</value>
+            </inscription>
+        </arc>
+        <arc id="T3 : sortie rive Sud TO P3 : sortie rive Sud" source="T3 : sortie rive Sud" target="P3 : sortie rive Sud">
+            <arcpath id="" x="530.0" y="395.0" curvePoint="false"/>
+            <arcpath id="" x="617.0" y="395.0" curvePoint="false"/>
+            <type value="normal"/>
+            <inscription>
+                <value>Default,1</value>
+            </inscription>
+        </arc>
+        <arc id="P5 : lumière Montréal TO T4 : feu Montréal" source="P5 : lumière Montréal" target="T4 : feu Montréal">
+            <arcpath id="" x="303.0" y="47.0" curvePoint="false"/>
+            <arcpath id="" x="226.0" y="47.0" curvePoint="false"/>
+            <type value="normal"/>
+            <inscription>
+                <value>Default,1</value>
+            </inscription>
+        </arc>
+        <arc id="P4 : tunnel TO T3 : sortie rive Sud" source="P4 : tunnel" target="T3 : sortie rive Sud">
+            <arcpath id="" x="386.0" y="300.0" curvePoint="false"/>
+            <arcpath id="" x="520.0" y="395.0" curvePoint="false"/>
+            <type value="normal"/>
+            <inscription>
+                <value>Default,1</value>
+            </inscription>
+        </arc>
+        <arc id="P6 : lumière rive Sud TO T5 : feu rive Sud" source="P6 : lumière rive Sud" target="T5 : feu rive Sud">
+            <arcpath id="" x="469.0" y="46.0" curvePoint="false"/>
+            <arcpath id="" x="569.0" y="43.0" curvePoint="false"/>
+            <type value="normal"/>
+            <inscription>
+                <value>Default,1</value>
+            </inscription>
+        </arc>
+        <arc id="P1 : entrée rive Sud TO T1 : entrée rive Sud" source="P1 : entrée rive Sud" target="T1 : entrée rive Sud">
+            <arcpath id="" x="620.0" y="216.0" curvePoint="false"/>
+            <arcpath id="" x="511.0" y="215.0" curvePoint="false"/>
+            <type value="normal"/>
+            <inscription>
+                <value>Default,1</value>
+            </inscription>
+        </arc>
+        <arc id="P4 : tunnel TO T2 : sortie Montréal" source="P4 : tunnel" target="T2 : sortie Montréal">
+            <arcpath id="" x="362.0" y="301.0" curvePoint="false"/>
+            <arcpath id="" x="241.0" y="392.0" curvePoint="false"/>
+            <type value="normal"/>
+            <inscription>
+                <value>Default,1</value>
+            </inscription>
+        </arc>
+        <arc id="P0 : entrée Montréal TO T0 : entrée Montréal" source="P0 : entrée Montréal" target="T0 : entrée Montréal">
+            <arcpath id="" x="170.0" y="212.0" curvePoint="false"/>
+            <arcpath id="" x="251.0" y="212.0" curvePoint="false"/>
+            <type value="normal"/>
+            <inscription>
+                <value>Default,1</value>
+            </inscription>
+        </arc>
+    </net>
+</pnml>
