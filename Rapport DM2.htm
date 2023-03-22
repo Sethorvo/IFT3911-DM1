@@ -323,8 +323,10 @@ En utilisant la loi de conservation et en observant le graphe de couverture, il 
         
         <br><br>
     
-        Commen nous pouvons le remarquer nos classes d'interfaces ont les plus gros fardeau étant donné qu'ils appelent et utilisent la majorité des autres classes. Pour ce qui est des autres classes on peut voir que les utilisateurs ont de très petit fardeau indiquant une bonne cohésion. Pour les autres classes on peut voir que le fardeau tourne autours de la douzaine ce qui est bien si l'on compare à la vingtaine que les classes d'interface ont. Ainsi, nos fardeaux indiquent une bonne cohésion pour la majorité de nos classes.
+        Comme nous pouvons le remarquer nos classes d'interfaces ont les plus gros fardeau étant donné qu'ils appelent et utilisent la majorité des autres classes. Pour ce qui est des autres classes on peut voir que les utilisateurs ont de très petit fardeau indiquant une bonne cohésion. Pour les autres classes on peut voir que le fardeau tourne autours de la douzaine ce qui est bien si l'on compare à la vingtaine que les classes d'interface ont. Ainsi, nos fardeaux indiquent une bonne cohésion pour la majorité de nos classes.
         
+    
+        <br><br>
         En ce qui concerne la justification de l’application des principes de conception, nous avons fait de notre mieux pour les appliquer à notre diagramme.
         
         <br><br>Pour le Single Responsibility Principle, nous avons fait en sorte de corrigé nos classes ayant plusieurs fonctionnalités tel que l’ancienne classe Client et Admin et avons créé plusieurs autres classes les permettant d’avoir qu’une seule fonctionnalité. Les classes Client et Admin sont rendus des simples classes d’objet représentant un utilisateur et les classes I_Client et I_Admin (les interfaces) permettent d’afficher les fonctionnalités disponibles aux utilisateurs. La classe Système permet de gérer un peu toutes les fonctionnalités concernant la recherche d’information. Pour les autres classes il est assez évident qu’ils ont qu’une seule responsabilité.
