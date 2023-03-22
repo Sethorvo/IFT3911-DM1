@@ -47,13 +47,13 @@
         <span style="font-weight: bold;">temps mis: </span>40 heures
     </p>
     <p>
-        <span style="font-weight: bold;">Nom: </span>Placeholder
+        <span style="font-weight: bold;">Nom: </span>Sami Sabri
         <br>
-        <span style="font-weight: bold;">Matricule: </span>Placeholder
+        <span style="font-weight: bold;">Matricule: </span>20113533
         <br>
-        <span style="font-weight: bold;">Courriel: </span>@umontreal.ca
+        <span style="font-weight: bold;">Courriel: </span>sami.sabri@umontreal.ca
         <br>
-        <span style="font-weight: bold;">temps mis: </span>0 heures
+        <span style="font-weight: bold;">temps mis: </span>40 heures
     </p>
     <h2>
         Distribution des tâches</h2>
@@ -94,7 +94,7 @@
             </tr>
             <tr>
                 <td class="first_col">
-                    Statechart
+                    Statchart
                 </td>
                 <td>
                     Tout (100%)
@@ -138,16 +138,42 @@
     </table>
     <h2>
         Hypothèses</h2>
-    <p>
 
-
-    </p>
     <h2>
         Tâche 1 :Réseau de Pétri</h2>
     <p>
+    	Pour faire le réseau de Pétri, le système doit contrôler des feux de circulation dans un tunnel à deux voies entre Montréal et la rive Sud, en utilisant des places pour représenter l'état du système et des transitions pour représenter les événements qui modifient cet état. <br><br>
 
-
+    <img src="Tunnel/tunnel.png" alt="Reseau de Petri du Tunnel" width="650" height="450">
+    <br>
+    	Voici une descrption des places; <br><br>
+    	la place P0 représente l'entrée du tunnel pour les voitures venant de Montréal, tandis que la place P1 représente l'entrée du tunnel pour les voitures venant de la rive Sud. Les voitures peuvent entrer dans le tunnel à partir de ces deux places et sortir soit à la sortie Montréal (P2) ou la sortie rive Sud (P3) en passant par la place P4 qui représente le tunnel lui-même. Les places P5 et P6 représentent les feux de signalisation pour les voitures venant de Montréal et de la rive Sud respectivement. Si le feu est vert, les voitures peuvent continuer leur route vers l'entrée du tunnel. Si le feu est rouge, les voitures doivent attendre avant de pouvoir continuer.<br> <br>
+<br>
+    	Les transitions sont les éléments qui représentent les événements qui modifient l'état du circuit, tandis que les places sont les éléments qui représentent les états du circuit. Voici une description des différentes transitions: <br> <br>
+    	La transition T0 correspond à l'entrée dans la partie Montréal, reliée à la place P4 : tunnel par un arc. La transition T1 correspond à l'entrée dans la partie rive Sud, reliée à la place P1 : entrée rive Sud par un arc. La transition T2 correspond à la sortie de la partie Montréal, reliée à la place P2 : sortie Montréal par un arc. La transition T3 correspond à la sortie de la partie rive Sud, reliée à la place P3 : sortie rive Sud par un arc. Les transitions T4 et T5 représentent les feux de circulation dans les parties Montréal et rive Sud, reliées respectivement aux places P5 : lumière Montréal et P6 : lumière rive Sud. 
+        <br>
     </p>
+        <p>
+        	Voici le graphe de couverture : <br>
+    <img src="Tunnel/CovGraph.png" alt="Graphe de couverture" width="350" height="600"><br>
+    <br>
+    les transitions sont étiquetées avec des lettres de A à S, tandis que les places sont étiquetées avec des nombres et des vecteurs représentant le nombre de voitures dans chaque zone du système.<br> Le graphe de couverture est conçu de manière à garantir qu'une seule voiture peut circuler à travers le tunnel à la fois, et que le système est équitable de part et d'autre du tunnel pour éviter toute famine. 
+        	<br>
+<br>
+Le tunnel est représenté par les transitions G et I, la transition G représente l'entrée du tunnel, tandis que la transition I représente la sortie du tunnel. 
+<br>La loi de conservation du nombre de voitures s'applique au tunnel, car le nombre de voitures qui entrent doit être égal au nombre de voitures qui sortent pour maintenir l'intégrité du système.<br>
+<br>
+Loi de conservation :<br>
+P0 + P1 + P2 + P3 + P4 = constante = 1 (puisque le système ne peut contenir qu'une voiture à la fois).<br>
+Comme le système ne peut contenir qu'une voiture à la fois, la somme des places P0, P1, P2, P3 et P4 doit être égale à 1 à tout moment. Cette loi de conservation assure que le nombre de voitures qui entrent dans le tunnel est égal au nombre de voitures qui en sortent, et qu'il ne peut y avoir qu'une voiture à la fois dans le tunnel.
+<br>
+<br>
+Le graphe montre que toutes les transitions peuvent être atteintes à partir de n'importe quelle place, ce qui signifie que tout état du système peut être atteint. Chaque transition a également une étiquette, ce qui signifie que chaque transition a une chance d'être exécutée. Par conséquent, le système est équitable de part et d'autre du tunnel.<br>
+<br>
+Prenons l'exemple du nœud "0: (1, 1, 0, 0)". À partir de cet état, les transitions A et B peuvent être atteintes. La transition A permet à la voiture de la rive Sud d'entrer dans le tunnel, tandis que la transition B permet à la voiture de Montréal d'entrer dans le tunnel. Étant donné que toutes les transitions ont une étiquette, cela signifie que les deux voitures ont une chance égale d'entrer dans le tunnel. Par conséquent, il n'y a pas de blocage permanent d'une voiture dans une place ou une transition, ce qui est une caractéristique de la famine.<br>
+<br>
+En utilisant la loi de conservation et en observant le graphe de couverture, il est possible de déduire qu'il n'y a pas de famine dans le réseau. Chaque transition a une chance d'être exécutée, et donc chaque voiture a une chance d'avancer dans le système sans être bloquée de manière permanente.<br>
+</p>
     <h2>
         Tâche 2 :Statechart</h2>
     <p>
