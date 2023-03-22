@@ -259,15 +259,24 @@ En utilisant la loi de conservation et en observant le graphe de couverture, il 
         Tâche 4 :</h2>
     <p>
         Dans notre premier diagramme de classe, les classes Client, Admin et Système contenait toutes les fonctions pour interagir avec les différentes options du Système de Voyage. Ainsi, pour faciliter la maintenabilité et la réutilisation nous avons séparé toutes ses fonctions dans différent Controller ou Interface. 
-        Pour chacune de nos classes d’objets, nous les avons couplés avec leur Controller respectif et les différents objets qui leurs sont reliés. Par exemple, Voyage et seulement accéder par le Système et le Voyage Controller. Celui-ci est aussi relié à la classe Transport et Compagnie et est le parent des classes Vol, Croisière et Trajet. 
-        Chaque Controller n’a accès qu’à la classe d’objet dont il est le Controller et est appeler à partir de l’une des 2 interfaces de base (Client et Admin). 
-        De ce qui est de l’interface, nous ne les avons pas inclus lors de notre première conception du Système de Voyage, mais avons corrigé cette erreur. Nous avons créé plusieurs différentes interfaces notamment l’interface Client et Admin. Nous avons aussi créé différentes interfaces reliées à celui de l’admin tel le MenuVoyage, MenuHub et MenuCompagnie, étant donné que l’interface d’Admin aurait été beaucoup trop chargé.
+        <br>Pour chacune de nos classes d’objets, nous les avons couplés avec leur Controller respectif et les différents objets qui leurs sont reliés. Par exemple, Voyage et seulement accéder par le Système et le Voyage Controller. Celui-ci est aussi relié à la classe Transport et Compagnie et est le parent des classes Vol, Croisière et Trajet. 
+        <br>Chaque Controller n’a accès qu’à la classe d’objet dont il est le Controller et est appeler à partir de l’une des 2 interfaces de base (Client et Admin). 
+        <br>De ce qui est de l’interface, nous ne les avons pas inclus lors de notre première conception du Système de Voyage, mais avons corrigé cette erreur. Nous avons créé plusieurs différentes interfaces notamment l’interface Client et Admin. Nous avons aussi créé différentes interfaces reliées à celui de l’admin tel le MenuVoyage, MenuHub et MenuCompagnie, étant donné que l’interface d’Admin aurait été beaucoup trop chargé.
 
-        <br>Pour ce qui est de la cohésion, nous avons fait ce que l’on pouvait pour en obtenir la plus forte possible. Pour la majorité de nos classes d’objets tel que Voyage ou Transport, nous utilisons ici une cohésion informationnelle étant donné que ces modules effectuent des actions avec un code indépendant pour chacune et opérant tous sur la même structure de donnée. 
+        <br><br>Pour ce qui est de la cohésion, nous avons fait ce que l’on pouvait pour en obtenir la plus forte possible. Pour la majorité de nos classes d’objets tel que Voyage ou Transport, nous utilisons ici une cohésion informationnelle étant donné que ces modules effectuent des actions avec un code indépendant pour chacune et opérant tous sur la même structure de donnée. 
         Pour nos Controllers soit VoyageController, PaiementController et SiegeController, nous avons ici une cohésion communicationnelle, étant donné que ces modules effectuent une série d’actions reliées par la procédure que le produit doit suivre et les actions opèrent sur les même données (soit les Voyages, le Paiement et les Sièges pour ces 3 cas). 
         Nous avons encore une fois une cohésion forte pour ces classes-là. 
-
-
+        
+        <br><br>
+        
+        En ce qui concerne la justification de l’application des principes de conception, nous avons fait de notre mieux pour les appliquer à notre diagramme.
+        
+        <br><br>Pour le Single Responsibility Principle, nous avons fait en sorte de corrigé nos classes ayant plusieurs fonctionnalités tel que l’ancienne classe Client et Admin et avons créé plusieurs autres classes les permettant d’avoir qu’une seule fonctionnalité. Les classes Client et Admin sont rendus des simples classes d’objet représentant un utilisateur et les classes I_Client et I_Admin (les interfaces) permettent d’afficher les fonctionnalités disponibles aux utilisateurs. La classe Système permet de gérer un peu toutes les fonctionnalités concernant la recherche d’information. Pour les autres classes il est assez évident qu’ils ont qu’une seule responsabilité.
+        <br><br>Pour le cas du Open/Closed Principle, nous ponsons l’avoir déjà bien respecté lors de la première conception du diagramme étant donné notre grand usage de classes abstraites et concrètes. Nos classes sont pour une majorité ouverte à l’extension et fermée à la modification.
+        <br><br>Pour le Liskov Substitutability Principle, comme pour le OCP, nous avons aussi respecté ce principe de conception lors de notre première conception du diagramme de classe. Par exemple, nos classes Vol, Croisière et Trajet sont tous sous-type de Voyage et sont tous conforme à celui-ci. Pareil pour notre Classe Compagnie et ses sous-classes Aerienne, Ferroviaire et Navale.
+        <br><br>Pout ce qui est du Dependency Inversion Principle, nous l’avons bien implémenté lors de notre deuxième conception (celle-ci présente). Notamment nos classes dépendent souvent des abstractions. Par exemple, la majorité de nos Controllers dépendent directement de leur classe abstraite associé avec. Par exemple, PaiementController dépend de Paiement ou SiegeController avec Siège.
+        <br><br>Pour le Interface Segragation Principle, ce principe est celui que nous avons le moins respecté lors de la première conception et avons beaucoup corrigé lors de celle-ci. Nos classes Client et Admin dépendait de beaucoup de méthodes et fonctions qui n’utilisaient pas nécessairement. Ainsi nous avons crée les interfaces Client et Admin pour remédier à ce problème. Cependant, l’interface Admin contenait toujours beaucoup trop de méthodes à notre goût. Pour remédier à ce problème nous avons crée les différents Menu soit MenuVoyage, MenuHub et MenuCompagnie pour lui permettre les actions spécifiques à ces menus.
+        
     </p> 
     
     <ul>
