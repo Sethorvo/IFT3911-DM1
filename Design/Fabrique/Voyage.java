@@ -48,14 +48,6 @@ public class Voyage {
 		return this.date_heure_D;
 	}
 
-	/**
-	 * 
-	 * @param date_heure_D
-	 */
-	public void setDate_heure_D(string[] date_heure_D) {
-		this.date_heure_D = date_heure_D;
-	}
-
 	public string getID_trajet() {
 		return ID_trajet;
 	}

@@ -1,5 +1,7 @@
 public class VoyageFinder implements VoyageIterator {
 
+	private ListeVoyage list;
+
 	public Container first() {
 		// TODO - implement VoyageFinder.first
 		throw new UnsupportedOperationException();
@@ -49,4 +51,5 @@ public class VoyageFinder implements VoyageIterator {
 		// TODO - implement VoyageFinder.getTransport
 		throw new UnsupportedOperationException();
 	}
+
 }
