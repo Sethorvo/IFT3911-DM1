@@ -1,18 +1,15 @@
-public class BoatFactory {
+public class BoatFactory implements VoyEntiteFactory {
 
 	public Hub createHub() {
-		// TODO - implement BoatFactory.createHub
-		throw new UnsupportedOperationException();
+		return new Port();
 	}
 
 	public Compagnie createCompagnie() {
-		// TODO - implement BoatFactory.createCompagnie
-		throw new UnsupportedOperationException();
+		return new Navale();
 	}
 
 	public Voyage createVoyage() {
-		// TODO - implement BoatFactory.createVoyage
-		throw new UnsupportedOperationException();
+		return new Croisiere();
 	}
 
 }

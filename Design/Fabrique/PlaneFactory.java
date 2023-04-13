@@ -1,18 +1,15 @@
-public class PlaneFactory {
+public class PlaneFactory implements VoyEntiteFactory {
 
 	public Hub createHub() {
-		// TODO - implement PlaneFactory.createHub
-		throw new UnsupportedOperationException();
+		return new Aeroport();
 	}
 
 	public Compagnie createCompagnie() {
-		// TODO - implement PlaneFactory.createCompagnie
-		throw new UnsupportedOperationException();
+		return new Aerienne();
 	}
 
 	public Voyage createVoyage() {
-		// TODO - implement PlaneFactory.createVoyage
-		throw new UnsupportedOperationException();
+		return new Vol();
 	}
 
 }

@@ -1,18 +1,15 @@
-public class TrainFactory {
+public class TrainFactory implements VoyEntiteFactory {
 
 	public Hub createHub() {
-		// TODO - implement TrainFactory.createHub
-		throw new UnsupportedOperationException();
+		return new Gare();
 	}
 
 	public Compagnie createCompagnie() {
-		// TODO - implement TrainFactory.createCompagnie
-		throw new UnsupportedOperationException();
+		return new Ferroviaire();
 	}
 
 	public Voyage createVoyage() {
-		// TODO - implement TrainFactory.createVoyage
-		throw new UnsupportedOperationException();
+		return new Trajet();
 	}
 
 }
