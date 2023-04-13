@@ -4,9 +4,8 @@ public class Reserve implements Etat {
 	 * 
 	 * @param context
 	 */
-	public void event(Siege context) {
-		// TODO - implement Reserve.event
-		throw new UnsupportedOperationException();
+	void event(String e, Siege context) {
+		siege.setState(Reserve);
 	}
 
 }

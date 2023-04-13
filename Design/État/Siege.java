@@ -5,15 +5,14 @@ public class Siege {
 	private int prix;
 	private Client client_r;
 	private int num_reservation;
-	private Etat_Reservation curr_state;
+	private Etat curr_state;
 
 	/**
 	 * 
 	 * @param e
 	 */
 	public void event(String e) {
-		// TODO - implement Siege.event
-		throw new UnsupportedOperationException();
+		this.curr_state.event(e);
 	}
 
 	/**
@@ -21,8 +20,7 @@ public class Siege {
 	 * @param s
 	 */
 	public void setState(Etat s) {
-		// TODO - implement Siege.setState
-		throw new UnsupportedOperationException();
+		this.curr_state = s;
 	}
 
 }
