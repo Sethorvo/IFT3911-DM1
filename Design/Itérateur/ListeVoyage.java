@@ -1,13 +1,19 @@
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 public class ListeVoyage implements Iterable {
+	private List<Voyage> voyages;
 
-	public void addVoyage() {
-		// TODO - implement ListeVoyage.addVoyage
-		throw new UnsupportedOperationException();
+	public ListeVoyage() {
+		voyages = new ArrayList<>();
+	}
+	public void addVoyage(voy Voyage) {
+		voyages.add(voy);
 	}
 
-	public Voyage removeVoyage() {
-		// TODO - implement ListeVoyage.removeVoyage
-		throw new UnsupportedOperationException();
+	public void removeVoyage(voy Voyage) {
+		voyages.remove(voy);
 	}
 
 }
