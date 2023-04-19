@@ -1,0 +1,187 @@
+<html data-lt-installed="true">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>IFT3911 DM3</title>
+    <style type="text/css">
+        table {
+            border: outset 2px black;
+            border-collapse: collapse;
+        }
+        
+        th {
+            border-bottom: double 2px black;
+        }
+        
+        td {
+            border-bottom: solid 1px black;
+        }
+        
+        .first_col {
+            border-right: double 2px black;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="text-align: center;">
+        IFT 3911 - Devoir 3</h1>
+    <h2>
+        Information générale</h2>
+    <p>
+        <span style="font-weight: bold;">Nom: </span>Alexandre Eyrolle
+        <br>
+        <span style="font-weight: bold;">Matricule: </span>4593
+        <br>
+        <span style="font-weight: bold;">Courriel: </span>alexandre.eyrolle@umontreal.ca
+        <br>
+        <span style="font-weight: bold;">temps mis: </span>30 heures
+    </p>
+    <p>
+        <span style="font-weight: bold;">Nom: </span>Wassim Berrachedi
+        <br>
+        <span style="font-weight: bold;">Matricule: </span>2544
+        <br>
+        <span style="font-weight: bold;">Courriel: </span>wassim.berrachedi@umontreal.ca
+        <br>
+        <span style="font-weight: bold;">temps mis: </span>40 heures
+    </p>
+    <p>
+        <span style="font-weight: bold;">Nom: </span>Sami Sabri
+        <br>
+        <span style="font-weight: bold;">Matricule: </span>3533
+        <br>
+        <span style="font-weight: bold;">Courriel: </span>sami.sabri@umontreal.ca
+        <br>
+        <span style="font-weight: bold;">temps mis: </span>40 heures
+    </p>
+    <h2>
+        Distribution des tâches</h2>
+    <p>
+        <span style="font-weight: bold;">Soumetteur: </span>Alexandre Eyrolle
+    </p>
+    <table cellpadding="7px">
+        <thead>
+            <tr>
+                <th class="first_col">
+                    Tâche
+                </th>
+                <th>
+                    Alexandre
+                </th>
+                <th>
+                    Wassim
+                </th>
+                <th>
+                    Sami
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="first_col">
+                    Placeholder
+                </td>
+                <td>
+                    (0%)
+                </td>
+                <td>
+                    (0%)
+                </td>
+                <td>
+                    Tout (100%)
+                </td>
+            </tr>
+            <tr>
+                <td class="first_col">
+                    Diagramme de classe,séquence et génération de code pour les patrons Fabrique, Itérateur, État
+                </td>
+                <td>
+                    Tout (100%)
+                </td>
+                <td>
+                    (0%)
+                </td>
+                <td>
+                    (0%)
+                </td>
+            </tr>
+            <tr>
+                <td class="first_col">
+                    Placeholder
+                </td>
+                <td>
+                    (0%)
+                </td>
+                <td>
+                    Tout (100%)
+                </td>
+                <td>
+                    (0%)
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>
+        Tâche 1 :Patrons requis dans l'énoncé</h2>
+    <p>
+        <p>
+            <h3>Voila le Diagrame de classe pour le patron de Fabrique <br></h3>
+        <img src="Design/Fabrique/FabriqueClasse.jpg" alt="Diagramme de classe Fabrique" width="1600"><br>
+        </p>
+
+        <p>
+            <h3>Voila le Diagrame de séquence pour le patron de Fabrique<br></h3>
+        <img src="Design/Fabrique/FabriqueSequence.jpg" alt="Diagramme de sequence Fabrique"><br>
+        </p>
+
+        <p>
+            <h3>Voila le Diagrame de classe pour le patron d'État<br></h3>
+        <img src="Design/État/EtatClasse.jpg" alt="Diagramme de classe Etat"><br>
+        </p>
+
+        <p>
+            <h3>Voila le Diagrame de séquence pour le patron d'État<br></h3>
+        <img src="Design/État/EtatSequence.jpg" alt="Diagramme de sequence Etat"><br>
+        </p>
+        
+    </p>
+
+    <h2>
+        Tâche 2 :Patrons supplémentaires</h2>
+    <p>
+        Pour le premier patron supplémentaire nous avons décidé d'implémenter un Itérateur, pour un application de recherche de voyage cela semblait pertinent, 
+        nous justifieront plus ce choix dans la section tâche 4.
+        <h3>Voila le Diagrame de classe pour le patron d'Itérateur <br></h3>
+        <img src="Design/Itérateur/Iterateur.jpg" alt="Diagramme de classe Iterateur">
+    </p> 
+    
+    <h2>
+        Tâche 4 :Discussion de la qualité</h2>
+        <p>
+            Pour la discussion de la qualité nous pouvons commencer avec le patron de Fabrique, avec ce patron on arrive à découpler la création d'une classe du reste de l'application, cela déjà améliore donc le couplage où précèdemment
+            dans notre devoir 2, un administrateur pouvait créer ces classes là dans la classe générale Systeme ce qui brisait le SRP. De plus la cohésion est aussi améliorer avec la séparation de ces entités, la création d'un côté, la modification de l'autre.
+            Cela peut faciliter la maintenance ou la modification/réutilisation de l'application dans l'avenir, enlever ou ajouter de nouveaux modes de transport sera plus facile, il suffir d'ajouter ou d'enlever des classes avec des opérations très simple plutôt que
+            d'aller dans la classe Système qui était essentiellement notre classe 'main', aidant aussi pour le OCP.
+        </p>
+        <p>
+            Nous pouvons continuer aussi avec le patron du diagramme d'État, la première grosse améliration est la gestion du processus de réservation puis de confirmation de siège. Dans le design du devoir 2, le siège avait seulement un attribut boolean
+            libre ou non. Il n'y avait pas directement quelque chose qui pouvait distinguer un siège réserver et confirmer. Ce processus aurait surement du être géré avec le code dans une autre classe qui aurait réduit la cohésion de l'application, d'autant plus
+            qu'il sera plus facile désormais de prendre en compte le délai de 24h localement dans l'application, ou même la possibilité de changer ce temps de délai si on veut réutiliser ce patron de réservation pour d'autres chose (réservation de salle ou d'un terrain
+            de sport par exemple.) De plus les différents états dépends de l'interface État et non le siège directement ce qui aide au DIP de l'application.  
+        </p>
+        <p>
+            Dernièrement pour l'implémentation de l'itérateur pour les voyages, comme expliqué précédemment cela aidera grandement pour parcourir la liste des Voyages disponible pour les clients. De plus avec l'intégration de plusieurs Interfaces pour les différents
+            types d'itérator que l'on veut cela aide a respecter le ISP, si jamais nous voulons créer de futurs itérateurs dans l'application le respect de ce principer nous aidera grandement. De plus l'implémentation de ce patron permet d'avoir plusieurs itérateurs
+            qui fonctionnent en parallèle sur la même liste, pour un système aussi important et globale qu'une liste de vol c'est un aspect important à ajouter au design de notre application. On améliore le couplage aussi en séparant la liste elle même de la classe voyage
+            et du reste de l'application au contraire de notre devoir 2, cela aide aussi à respecter le SRP.
+        </p>
+    <ul>
+        <a href=""></a>
+    </ul>
+
+
+</body>
+
+</html>
