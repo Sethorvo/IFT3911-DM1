@@ -175,6 +175,15 @@
         à l'observateur, aidant à respecter le OCP.
     </p>
     <p>
+        Pour le cas du patron de Commande, il était assez compliqué à réaliser car on désirais trouver une logique qui ne demandait pas de relier toute les différentes commande de l'administrateur. Cependant, c'est exactement ce dont nou avons fait. Nous avons tout simplement
+        créer une classe pour chaque opération que l'admin puisse entreprendre et leur permettre le undo à chacune d'entre elle.
+    </p>
+    <p>
+        On arrive ainsi au dernier patron requis, la patron Visiteur. À la base nous allons opter pour que les éléments concrets soit directement les interfaces d'admin et client pour simplifier la tâche. Cependant, nous avons vite compris qu'il s'agit d'un design moins idéal 
+        que celui présenté. Nous avons opté de créer des classes AdminVoyage et ClientVoyage qui géront eux-mêmes chacune des chaines de caractères pour l'affichage du Voyage. De plus, nous avons utilisé la classe IVisitable pour permettre une visite facile à la classe de Voyage 
+        pour ainsi obtenir l'information désiré plus facilement tout en respectant les principes de conception.
+    </p>  
+    <p>
         Pour le premier patron supplémentaire nous avons choisit d'aller avec un patron de Stratégie pour le calcul d'un prix du siège. Même si notre design du devoir 2 fonctionnait pour l'implémentation avec les prix fixes des sections, tout changement de prix
         ou ajout de nouvelles sections aurait été un problème à modifier, le couplage était trop fort et ne respectait pas le OCP. De cette manière nous pouvons retirer le couplage entre la classe générale Section et toutes les autres sous classes. De
         plus avec ce patron il est plus facile de rajouter des nouveaux calculs de prix à l'avenir (si quelqu'un a une carte membre ou des miles par exemple), et chaque classe est plus spécifique maintenant aidant au SRP.
